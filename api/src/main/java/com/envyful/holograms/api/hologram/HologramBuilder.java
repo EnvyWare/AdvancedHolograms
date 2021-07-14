@@ -9,6 +9,15 @@ public interface HologramBuilder {
 
     /**
      *
+     * Sets the id for the {@link Hologram}
+     *
+     * @param id The id of the hologram
+     * @return The builder
+     */
+    HologramBuilder id(String id);
+
+    /**
+     *
      * Sets the world stored in the builder
      *
      * @param worldName The name of the world

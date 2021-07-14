@@ -19,6 +19,15 @@ public interface PlatformHologramManager {
 
     /**
      *
+     * Creates an empty builder with given id
+     *
+     * @param id The id of the new builder
+     * @return The new builder
+     */
+    HologramBuilder builder(String id);
+
+    /**
+     *
      * Creates an empty builder with given lines
      *
      * @return The new builder
