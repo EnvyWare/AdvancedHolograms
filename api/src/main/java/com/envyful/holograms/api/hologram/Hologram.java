@@ -1,4 +1,4 @@
-package com.envyful.holograms.api;
+package com.envyful.holograms.api.hologram;
 
 /**
  *
