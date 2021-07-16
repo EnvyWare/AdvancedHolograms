@@ -2,8 +2,6 @@ package com.envyful.holograms.forge;
 
 
 import com.envyful.holograms.api.manager.HologramFactory;
-import com.envyful.holograms.forge.command.TestAddLineCommand;
-import com.envyful.holograms.forge.command.TestCreateCommand;
 import com.envyful.holograms.forge.hologram.manager.ForgeHologramManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
