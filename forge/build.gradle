@@ -40,8 +40,10 @@ dependencies {
 
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.5'
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.1.5'
+/*    shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.5'
+    shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.1.5'*/
+
+    shadow group: 'com.github.Pixelmon-Development.API', name: 'EnvyAPI-Pixelmon-Reforged', version: '0.1.5'
 
     shadow project(':api')
 }

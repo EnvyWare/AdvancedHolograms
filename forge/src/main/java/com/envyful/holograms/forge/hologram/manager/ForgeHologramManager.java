@@ -17,6 +17,11 @@ public class ForgeHologramManager implements PlatformHologramManager {
     }
 
     @Override
+    public HologramBuilder builder(String id) {
+        return new ForgeHologramBuilder().id(id);
+    }
+
+    @Override
     public HologramBuilder builder(String... lines) {
         HologramBuilder builder = new ForgeHologramBuilder();
         builder.lines(lines);
