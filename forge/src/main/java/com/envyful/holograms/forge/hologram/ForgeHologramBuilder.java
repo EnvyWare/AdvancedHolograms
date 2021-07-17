@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class ForgeHologramBuilder implements HologramBuilder {
 
+    private String id;
     private String worldName;
     private double x;
     private double y;
@@ -24,6 +25,12 @@ public class ForgeHologramBuilder implements HologramBuilder {
     private List<String> lines = Lists.newArrayList();
 
     public ForgeHologramBuilder() {}
+
+    @Override
+    public HologramBuilder id(String id) {
+        this.id = id;
+        return this;
+    }
 
     @Override
     public HologramBuilder world(String worldName) {
@@ -60,6 +67,6 @@ public class ForgeHologramBuilder implements HologramBuilder {
         }
 
         Vec3d pos = new Vec3d((float) this.x, (float) this.y, (float) this.z);
-        return new ForgeHologram(world, pos, this.lines.toArray(new String[0]));
+        return new ForgeHologram(this.id, world, pos, this.lines.toArray(new String[0]));
     }
 }

@@ -31,7 +31,8 @@ public class ForgeHologram implements Hologram {
 
     private final List<UUID> nearbyPlayers = Lists.newArrayList();
 
-    public ForgeHologram(World world, Vec3d position, String... lines) {
+    public ForgeHologram(String id, World world, Vec3d position, String... lines) {
+        this.id = id;
         this.world = world;
         this.position = position;
 
