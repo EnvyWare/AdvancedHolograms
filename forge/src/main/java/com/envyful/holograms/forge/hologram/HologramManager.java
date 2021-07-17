@@ -36,6 +36,15 @@ public class HologramManager implements Runnable {
 
     public static void save() {} //TODO:
 
+
+    public static void addHologram(Hologram hologram) {
+        if (!(hologram instanceof ForgeHologram)) {
+            return;
+        }
+
+        addHologram((ForgeHologram) hologram);
+    }
+
     public static void addHologram(ForgeHologram hologram) {
         HOLOGRAMS.put(hologram.getId().toLowerCase(), hologram);
     }
