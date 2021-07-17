@@ -36,7 +36,6 @@ public class HologramManager implements Runnable {
 
     public static void save() {} //TODO:
 
-
     public static void addHologram(Hologram hologram) {
         if (!(hologram instanceof ForgeHologram)) {
             return;
@@ -49,8 +48,20 @@ public class HologramManager implements Runnable {
         HOLOGRAMS.put(hologram.getId().toLowerCase(), hologram);
     }
 
+    public static void removeHologram(Hologram hologram) {
+        if (!(hologram instanceof ForgeHologram)) {
+            return;
+        }
+
+        removeHologram((ForgeHologram) hologram);
+    }
+
     public static void removeHologram(ForgeHologram hologram) {
         HOLOGRAMS.remove(hologram.getId().toLowerCase());
+    }
+
+    public static Hologram getById(String id) {
+        return HOLOGRAMS.get(id.toLowerCase());
     }
 
     public static List<Hologram> getAllHolograms() {
