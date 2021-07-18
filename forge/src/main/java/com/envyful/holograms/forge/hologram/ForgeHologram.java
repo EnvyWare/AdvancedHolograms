@@ -1,5 +1,6 @@
 package com.envyful.holograms.forge.hologram;
 
+import com.envyful.api.forge.concurrency.UtilForgeConcurrency;
 import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
@@ -49,6 +50,11 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void addLine(String line) {
+        if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
+            UtilForgeConcurrency.runSync(() -> this.addLine(line));
+            return;
+        }
+
         HologramArmorStand armorStand = new HologramArmorStand(this.world, this.position.x,
                 this.position.y - (HOLOGRAM_LINE_GAP * this.lines.size()), this.position.z);
 
