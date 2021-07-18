@@ -100,6 +100,41 @@ public class ForgeHologram implements Hologram {
     }
 
     @Override
+    public void insertLine(int index, String line) {
+        if (index > this.lines.size()) {
+            this.addLine(line);
+            return;
+        }
+
+        for (int i = (index - 1); i < this.lines.size(); ++i) {
+            HologramArmorStand armorStand = this.lines.get(i);
+            armorStand.setPosition(armorStand.posX, this.position.y - (HOLOGRAM_LINE_GAP * (i + 1)), armorStand.posZ);
+        }
+
+        UtilForgeConcurrency.runSync(() -> {
+            HologramArmorStand newLine = new HologramArmorStand(this.world, this.position.x,
+                    this.position.y - (HOLOGRAM_LINE_GAP * (index - 1)), this.position.z);
+            newLine.setText(line);
+            this.lines.add(index - 1, newLine);
+
+            for (UUID nearbyPlayer : this.nearbyPlayers) {
+                EntityPlayerMP player = UtilPlayer.getOnlinePlayer(nearbyPlayer);
+
+                if (player == null) {
+                    continue;
+                }
+
+                newLine.spawnForPlayer(player);
+
+                for (int i = (index - 1); i < this.lines.size(); ++i) {
+                    HologramArmorStand armorStand = this.lines.get(i);
+                    player.connection.sendPacket(new SPacketEntityTeleport(armorStand));
+                }
+            }
+        });
+    }
+
+    @Override
     public void removeLines(int... indexes) throws HologramException {
         for (int index : indexes) {
             this.removeLine(index);

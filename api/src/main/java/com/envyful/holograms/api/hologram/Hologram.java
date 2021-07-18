@@ -31,6 +31,15 @@ public interface Hologram {
 
     /**
      *
+     * Inserts the new line above the line number given
+     *
+     * @param lineNum The line number to insert above
+     * @param line The line to insert
+     */
+    void insertLine(int lineNum, String line);
+
+    /**
+     *
      * Adds a line to the hologram with the given text
      *
      * @param line The new line for the hologram
