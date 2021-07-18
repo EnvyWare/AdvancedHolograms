@@ -221,8 +221,8 @@ public class ForgeHologram implements Hologram {
     }
 
     @Override
-    public Hologram copy(String world, double x, double y, double z) {
-        return new ForgeHologramBuilder().world(world).position(x, y, z)
+    public Hologram copy(String newId, String world, double x, double y, double z) {
+        return new ForgeHologramBuilder().id(newId).world(world).position(x, y, z)
                 .lines(this.lines.stream().map(e -> e.getDisplayName().getFormattedText()).toArray(String[]::new))
                 .build();
     }

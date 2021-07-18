@@ -94,12 +94,13 @@ public interface Hologram {
      *
      * Copies the hologram's lines to a new hologram at the specified position
      *
+     * @param newId the new Id
      * @param world The world to copy it to
      * @param x The new X to copy it to
      * @param y The new Y to copy it to
      * @param z The new Z to copy it to
      * @return The new hologram instance
      */
-    Hologram copy(String world, double x, double y, double z);
+    Hologram copy(String newId, String world, double x, double y, double z);
 
 }

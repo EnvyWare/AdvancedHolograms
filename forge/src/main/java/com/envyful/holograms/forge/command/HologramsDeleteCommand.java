@@ -18,7 +18,7 @@ import net.minecraft.util.text.TextComponentString;
                 "d"
         }
 )
-@Permissible("holograms.command.create")
+@Permissible("holograms.command.dekete")
 @Child
 public class HologramsDeleteCommand {
 
