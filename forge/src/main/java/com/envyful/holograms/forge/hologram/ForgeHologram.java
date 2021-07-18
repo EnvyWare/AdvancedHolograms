@@ -104,16 +104,36 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void removeLine(int index) throws HologramException {
-        if (index >= this.lines.size()) {
+        if (lines.size() == 1) {
+            throw new HologramException("§4Cannot remove anymore lines as there's only one left! To delete use §7/hd delete " + this.id);
+        }
+
+        if (index > this.lines.size()) {
             throw new HologramException("§4Cannot remove that line as it's out of the bounds of this hologram.");
         }
 
-        HologramArmorStand remove = this.lines.remove(index);
+        HologramArmorStand remove = this.lines.remove(index - 1);
 
-        for (int i = index; i < this.lines.size(); ++i) {
+        for (int i = (index - 1); i < this.lines.size(); ++i) {
             HologramArmorStand armorStand = this.lines.get(i);
-            armorStand.setPosition(armorStand.posX, this.position.y - (HOLOGRAM_LINE_GAP * i), armorStand.posY);
+            armorStand.setPosition(armorStand.posX, this.position.y - (HOLOGRAM_LINE_GAP * i), armorStand.posZ);
         }
+
+        UtilForgeConcurrency.runSync(() -> {
+            for (UUID nearbyPlayer : this.nearbyPlayers) {
+                EntityPlayerMP player = UtilPlayer.getOnlinePlayer(nearbyPlayer);
+
+                if (player == null) {
+                    continue;
+                }
+
+                remove.despawnForPlayer(player);
+
+                for (HologramArmorStand line : this.lines) {
+                    player.connection.sendPacket(new SPacketEntityTeleport(line));
+                }
+            }
+        });
     }
 
     @Override
