@@ -12,7 +12,8 @@ import net.minecraft.command.ICommandSender;
         description = "Main holograms command",
         aliases = {
                 "hd",
-                "holographicdisplays"
+                "holographicdisplays",
+                "advancedholograms"
         }
 )
 @Permissible("advancedholograms.command")

@@ -59,7 +59,7 @@ public class ForgeHologram implements Hologram {
         }
 
         HologramLine armorStand = new HologramLine(new EntityArmorStand(this.world, this.position.x,
-                this.position.y - (0.6 * this.lines.size()), this.position.z));
+                this.position.y - (HOLOGRAM_LINE_GAP * this.lines.size()), this.position.z));
 
         this.lines.add(armorStand);
         armorStand.setText(line);
