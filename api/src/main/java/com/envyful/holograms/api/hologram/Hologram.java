@@ -1,5 +1,7 @@
 package com.envyful.holograms.api.hologram;
 
+import com.envyful.holograms.api.exception.HologramException;
+
 /**
  *
  * An interface representing a server hologram
@@ -48,8 +50,9 @@ public interface Hologram {
      * Removes a line from the hologram
      *
      * @param index The index of the line to remove
+     * @throws HologramException When index is out of bounds
      */
-    void removeLine(int index);
+    void removeLine(int index) throws HologramException;
 
     /**
      *
