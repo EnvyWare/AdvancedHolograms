@@ -40,7 +40,7 @@ public class HologramsCreateCommand {
 
         String firstLine = id;
 
-        if (args.length > 2) {
+        if (args.length > 1) {
             firstLine = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         }
 

@@ -5,7 +5,6 @@ import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
 import com.google.common.collect.Lists;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.math.Vec3d;
@@ -14,7 +13,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -152,8 +150,16 @@ public class ForgeHologram implements Hologram {
         return this.world;
     }
 
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
     public Vec3d getPosition() {
         return this.position;
+    }
+
+    public void setPosition(Vec3d position) {
+        this.position = position;
     }
 
     List<HologramArmorStand> getLines() {
