@@ -88,11 +88,15 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void setLine(int index, String text) {
-        if (index >= this.lines.size()) {
-            return;
+        if (index > this.lines.size()) {
+            this.addLine(text);
+        } else {
+            if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
+                UtilForgeConcurrency.runSync(() -> this.lines.get(index - 1).setText(text));
+            } else {
+                this.lines.get(index - 1).setText(text);
+            }
         }
-
-        this.lines.get(index).setText(text);
     }
 
     @Override

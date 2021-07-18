@@ -23,7 +23,8 @@ import net.minecraft.command.ICommandSender;
         HologramsTeleportCommand.class,
         HologramsMoveHereCommand.class,
         HologramsAddLineCommand.class,
-        HologramsRemoveLineCommand.class
+        HologramsRemoveLineCommand.class,
+        HologramsSetLineCommand.class
 })
 public class HologramsCommand {
 
