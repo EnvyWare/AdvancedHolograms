@@ -60,6 +60,10 @@ public class JsonHologramSaver implements HologramSaver {
             JsonReader jsonReader = new JsonReader(new FileReader(this.file));
             List<ForgeHologram> forgeHolograms = GSON.fromJson(jsonReader, ArrayList.class);
 
+            if (forgeHolograms == null) {
+                return holograms;
+            }
+
             forgeHolograms.forEach(hologram -> holograms.put(hologram.getId().toLowerCase(), hologram));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -83,6 +87,8 @@ public class JsonHologramSaver implements HologramSaver {
             }
 
             GSON.toJson(savedHolograms, ArrayList.class, jsonWriter);
+            jsonWriter.flush();
+            jsonWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

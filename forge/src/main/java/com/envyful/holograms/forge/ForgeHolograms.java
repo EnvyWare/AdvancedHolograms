@@ -59,6 +59,8 @@ public class ForgeHolograms {
         });
 
         this.commandFactory.registerCommand(event.getServer(), new HologramsCommand());
+
+        HologramManager.load();
     }
 
     public static ForgeHolograms getInstance() {

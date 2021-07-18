@@ -1,8 +1,8 @@
 package com.envyful.holograms.forge.config;
 
+import com.envyful.api.commons.shade.configurate.objectmapping.ConfigSerializable;
 import com.envyful.api.config.data.ConfigPath;
 import com.envyful.api.config.yaml.AbstractYamlConfig;
-import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 
 @ConfigPath("config/AdvancedHolograms/config.yml")
 @ConfigSerializable
