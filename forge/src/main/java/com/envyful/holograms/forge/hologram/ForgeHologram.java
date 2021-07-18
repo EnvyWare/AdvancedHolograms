@@ -40,6 +40,7 @@ public class ForgeHologram implements Hologram {
 
         this.addLines(lines);
         HologramManager.addHologram(this);
+        HologramManager.save();
     }
 
     @Override
@@ -62,6 +63,8 @@ public class ForgeHologram implements Hologram {
         this.lines.add(armorStand);
         armorStand.setText(line);
         this.spawnLine(armorStand);
+
+        HologramManager.save();
     }
 
     @Override
@@ -84,6 +87,8 @@ public class ForgeHologram implements Hologram {
             line.setWorld(foundWorld);
             line.setPosition(x, y, z);
         }
+
+        HologramManager.save();
     }
 
     @Override
@@ -92,9 +97,13 @@ public class ForgeHologram implements Hologram {
             this.addLine(text);
         } else {
             if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
-                UtilForgeConcurrency.runSync(() -> this.lines.get(index - 1).setText(text));
+                UtilForgeConcurrency.runSync(() -> {
+                    this.lines.get(index - 1).setText(text);
+                    HologramManager.save();
+                });
             } else {
                 this.lines.get(index - 1).setText(text);
+                HologramManager.save();
             }
         }
     }
@@ -131,6 +140,8 @@ public class ForgeHologram implements Hologram {
                     player.connection.sendPacket(new SPacketEntityTeleport(armorStand));
                 }
             }
+
+            HologramManager.save();
         });
     }
 
@@ -173,6 +184,8 @@ public class ForgeHologram implements Hologram {
                 }
             }
         });
+
+        HologramManager.save();
     }
 
     @Override
@@ -186,6 +199,7 @@ public class ForgeHologram implements Hologram {
         }
 
         HologramManager.removeHologram(this);
+        HologramManager.save();
     }
 
     @Override
@@ -218,6 +232,8 @@ public class ForgeHologram implements Hologram {
                 }
             });
         }
+
+        HologramManager.save();
     }
 
     @Override

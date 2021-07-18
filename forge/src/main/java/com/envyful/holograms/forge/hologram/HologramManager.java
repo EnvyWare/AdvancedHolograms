@@ -1,9 +1,13 @@
 package com.envyful.holograms.forge.hologram;
 
+import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.api.forge.concurrency.ForgeTaskBuilder;
 import com.envyful.api.forge.concurrency.UtilForgeConcurrency;
 import com.envyful.api.forge.listener.LazyListener;
 import com.envyful.holograms.api.hologram.Hologram;
+import com.envyful.holograms.api.manager.database.HologramSaver;
+import com.envyful.holograms.forge.ForgeHolograms;
+import com.envyful.holograms.forge.hologram.database.JsonHologramSaver;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -33,13 +37,20 @@ public class HologramManager implements Runnable {
                 .start();
 
         new QuitListener();
+        saver = new JsonHologramSaver(ForgeHolograms.getInstance().getConfig().getStorageLocation());
     }
 
     private static final Map<String, ForgeHologram> HOLOGRAMS = Maps.newConcurrentMap();
 
-    public static void load() {} //TODO:
+    private static HologramSaver saver;
 
-    public static void save() {} //TODO:
+    public static void load() {
+        UtilConcurrency.runAsync(saver::load);
+    }
+
+    public static void save() {
+        UtilConcurrency.runAsync(() -> saver.save(Lists.newArrayList(HOLOGRAMS.values())));
+    }
 
     public static void addHologram(Hologram hologram) {
         if (!(hologram instanceof ForgeHologram)) {
