@@ -3,13 +3,18 @@ package com.envyful.holograms.forge.hologram.database;
 import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.database.HologramSaver;
+import com.envyful.holograms.forge.hologram.ForgeHologram;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +52,37 @@ public class JsonHologramSaver implements HologramSaver {
 
     @Override
     public Map<String, Hologram> load() {
+        Map<String, Hologram> holograms = Maps.newHashMap();
 
-        return null;
+        try {
+            JsonReader jsonReader = new JsonReader(new FileReader(this.file));
+            List<ForgeHologram> forgeHolograms = GSON.fromJson(jsonReader, ArrayList.class);
+
+            forgeHolograms.forEach(hologram -> holograms.put(hologram.getId().toLowerCase(), hologram));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return holograms;
     }
 
     @Override
     public void save(List<Hologram> holograms) {
+        try {
+            JsonWriter jsonWriter = new JsonWriter(new FileWriter(this.file));
+            List<ForgeHologram> savedHolograms = Lists.newArrayList();
 
+            for (Hologram hologram : holograms) {
+                if (!(hologram instanceof ForgeHologram)) {
+                    continue;
+                }
+
+                savedHolograms.add((ForgeHologram) hologram);
+            }
+
+            GSON.toJson(savedHolograms, ArrayList.class, jsonWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
