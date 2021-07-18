@@ -2,6 +2,7 @@ package com.envyful.holograms.forge.hologram;
 
 import com.envyful.api.forge.concurrency.ForgeTaskBuilder;
 import com.envyful.api.forge.concurrency.UtilForgeConcurrency;
+import com.envyful.api.forge.listener.LazyListener;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
 import com.google.common.collect.Lists;
@@ -9,6 +10,8 @@ import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,6 +31,8 @@ public class HologramManager implements Runnable {
                 .delay(10L)
                 .task(new HologramManager())
                 .start();
+
+        new QuitListener();
     }
 
     private static final Map<String, ForgeHologram> HOLOGRAMS = Maps.newConcurrentMap();
@@ -99,6 +104,15 @@ public class HologramManager implements Runnable {
                         UtilForgeConcurrency.runSync(() -> line.updateForPlayer(player));
                     }
                 }
+            }
+        }
+    }
+
+    private static final class QuitListener extends LazyListener {
+        @SubscribeEvent
+        public void onPlayerQuit(PlayerEvent.PlayerLoggedOutEvent event) {
+            for (ForgeHologram value : HologramManager.HOLOGRAMS.values()) {
+                value.getNearbyPlayers().remove(event.player.getUniqueID());
             }
         }
     }
