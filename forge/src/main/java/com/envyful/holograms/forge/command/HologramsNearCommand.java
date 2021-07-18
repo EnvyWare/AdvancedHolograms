@@ -52,7 +52,7 @@ public class HologramsNearCommand {
             return;
         }
 
-        sender.sendMessage(new TextComponentString("§eNearby holograms (" + radius + "): "));
+        sender.sendMessage(new TextComponentString("§eNearby holograms (" + radius + "m): "));
 
         for (Hologram hologram : holograms) {
             sender.sendMessage(new TextComponentString("§e  * §b" + ((ForgeHologram) hologram).getId()

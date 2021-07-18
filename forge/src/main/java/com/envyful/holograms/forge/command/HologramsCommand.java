@@ -16,7 +16,12 @@ import net.minecraft.command.ICommandSender;
         }
 )
 @Permissible("holograms.command")
-@SubCommands({HologramsCreateCommand.class, HologramsDeleteCommand.class, HologramsNearCommand.class})
+@SubCommands({
+        HologramsCreateCommand.class,
+        HologramsDeleteCommand.class,
+        HologramsNearCommand.class,
+        HologramsTeleportCommand.class
+})
 public class HologramsCommand {
 
     @CommandProcessor

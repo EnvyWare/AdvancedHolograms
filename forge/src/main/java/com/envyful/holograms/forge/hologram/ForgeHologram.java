@@ -148,11 +148,11 @@ public class ForgeHologram implements Hologram {
         return this.id;
     }
 
-    World getWorld() {
+    public World getWorld() {
         return this.world;
     }
 
-    Vec3d getPosition() {
+    public Vec3d getPosition() {
         return this.position;
     }
 
