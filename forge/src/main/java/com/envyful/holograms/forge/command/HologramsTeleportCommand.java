@@ -9,7 +9,6 @@ import com.envyful.api.command.annotate.executor.Sender;
 import com.envyful.api.forge.player.util.UtilTeleport;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.ForgeHologram;
-import com.envyful.holograms.forge.hologram.HologramManager;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 
@@ -25,15 +24,8 @@ import net.minecraft.util.text.TextComponentString;
 public class HologramsTeleportCommand {
 
     @CommandProcessor
-    public void nearbyCommand(@Sender EntityPlayerMP sender, @Argument String id) {
-        Hologram byId = HologramManager.getById(id);
-
-        if (byId == null) {
-            sender.sendMessage(new TextComponentString("§4Cannot find a hologram with that id. §7/hd teleport <id>"));
-            return;
-        }
-
+    public void nearbyCommand(@Sender EntityPlayerMP sender, @Argument Hologram hologram) {
         sender.sendMessage(new TextComponentString("§eTeleporting... "));
-        UtilTeleport.teleportPlayer(sender, ((ForgeHologram) byId).getWorld(), ((ForgeHologram) byId).getPosition(), 0f, 0f);
+        UtilTeleport.teleportPlayer(sender, ((ForgeHologram) hologram).getWorld(), ((ForgeHologram) hologram).getPosition(), 0f, 0f);
     }
 }
