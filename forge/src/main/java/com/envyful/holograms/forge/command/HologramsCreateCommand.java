@@ -34,7 +34,7 @@ public class HologramsCreateCommand {
         String firstLine = id;
 
         if (args.length > 2) {
-            firstLine = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
+            firstLine = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         }
 
         HologramFactory.builder(id)
