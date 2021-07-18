@@ -7,6 +7,7 @@ import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
 import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.manager.HologramFactory;
+import com.envyful.holograms.forge.hologram.HologramManager;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 
@@ -31,6 +32,12 @@ public class HologramsCreateCommand {
         }
 
         String id = args[0];
+
+        if (HologramManager.getById(id) != null) {
+            sender.sendMessage(new TextComponentString("§4Error! A hologram with that id already exists. §7/hd create <id> <first line>"));
+            return;
+        }
+
         String firstLine = id;
 
         if (args.length > 2) {
