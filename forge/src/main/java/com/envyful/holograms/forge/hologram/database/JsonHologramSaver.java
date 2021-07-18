@@ -4,6 +4,7 @@ import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.database.HologramSaver;
 import com.envyful.holograms.forge.hologram.ForgeHologram;
+import com.envyful.holograms.forge.hologram.ForgeHologramTypeAdapter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -27,6 +28,7 @@ public class JsonHologramSaver implements HologramSaver {
 
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
+            .registerTypeAdapter(ForgeHologram.class, new ForgeHologramTypeAdapter())
             .excludeFieldsWithModifiers(Modifier.TRANSIENT, Modifier.STATIC)
             .create();
 

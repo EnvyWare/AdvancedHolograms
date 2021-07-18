@@ -32,6 +32,8 @@ public class HologramArmorStand extends EntityArmorStand {
         }
     }
 
+    private String text;
+
     public HologramArmorStand(World worldIn) {
         super(worldIn);
 
@@ -81,6 +83,11 @@ public class HologramArmorStand extends EntityArmorStand {
      * @param text The new line of the hologram
      */
     public void setText(String text) {
+        this.text = text;
         this.setCustomNameTag(UtilChatColour.translateColourCodes('&', text));
+    }
+
+    public String getText() {
+        return this.text;
     }
 }
