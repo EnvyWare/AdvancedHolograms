@@ -6,8 +6,8 @@ import com.envyful.api.command.annotate.Permissible;
 import com.envyful.api.command.annotate.executor.Argument;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
+import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.hologram.Hologram;
-import com.envyful.holograms.forge.hologram.ForgeHologram;
 import com.envyful.holograms.forge.hologram.HologramManager;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
@@ -34,7 +34,6 @@ public class HologramsMoveHereCommand {
         }
 
         sender.sendMessage(new TextComponentString("§eTeleporting... "));
-        ((ForgeHologram) byId).setWorld(sender.world);
-        ((ForgeHologram) byId).setPosition(sender.getPositionVector());
+        byId.teleport(UtilWorld.getName(sender.world), sender.posX, sender.posY, sender.posZ);
     }
 }

@@ -68,6 +68,17 @@ public interface Hologram {
 
     /**
      *
+     * Teleports the hologram to the x, y, z coords in the given world
+     *
+     * @param worldName The new world
+     * @param x The new x
+     * @param y The new y
+     * @param z The new z
+     */
+    void teleport(String worldName, double x, double y, double z);
+
+    /**
+     *
      * Copies the hologram's lines to a new hologram at the specified position
      *
      * @param world The world to copy it to

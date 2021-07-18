@@ -1,11 +1,13 @@
 package com.envyful.holograms.forge.hologram;
 
 import com.envyful.api.forge.concurrency.UtilForgeConcurrency;
+import com.envyful.api.forge.player.util.UtilPlayer;
 import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.play.server.SPacketEntityTeleport;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -127,6 +129,35 @@ public class ForgeHologram implements Hologram {
     }
 
     @Override
+    public void teleport(String worldName, double x, double y, double z) {
+        World world = UtilWorld.findWorld(worldName);
+
+        if (world == null) {
+            return;
+        }
+
+        int i = 0;
+
+        for (HologramArmorStand line : this.lines) {
+            line.setWorld(world);
+            line.setPosition(x, y - (i * HOLOGRAM_LINE_GAP), z);
+            ++i;
+
+            UtilForgeConcurrency.runSync(() -> {
+                for (UUID nearbyPlayer : this.nearbyPlayers) {
+                    EntityPlayerMP player = UtilPlayer.getOnlinePlayer(nearbyPlayer);
+
+                    if (player == null) {
+                        continue;
+                    }
+
+                    player.connection.sendPacket(new SPacketEntityTeleport(line));
+                }
+            });
+        }
+    }
+
+    @Override
     public Hologram copy(String world, double x, double y, double z) {
         return new ForgeHologramBuilder().world(world).position(x, y, z)
                 .lines(this.lines.stream().map(e -> e.getDisplayName().getFormattedText()).toArray(String[]::new))
@@ -150,16 +181,8 @@ public class ForgeHologram implements Hologram {
         return this.world;
     }
 
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
     public Vec3d getPosition() {
         return this.position;
-    }
-
-    public void setPosition(Vec3d position) {
-        this.position = position;
     }
 
     List<HologramArmorStand> getLines() {
