@@ -2,6 +2,7 @@ package com.envyful.holograms.forge.hologram.database;
 
 import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.holograms.api.hologram.Hologram;
+import com.envyful.holograms.api.manager.HologramFactory;
 import com.envyful.holograms.api.manager.database.HologramSaver;
 import com.envyful.holograms.forge.hologram.ForgeHologram;
 import com.envyful.holograms.forge.hologram.ForgeHologramTypeAdapter;
@@ -9,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
@@ -58,18 +60,33 @@ public class JsonHologramSaver implements HologramSaver {
 
         try {
             JsonReader jsonReader = new JsonReader(new FileReader(this.file));
-            List<ForgeHologram> forgeHolograms = GSON.fromJson(jsonReader, ArrayList.class);
+            List<LinkedTreeMap<String, Object>> forgeHolograms = GSON.fromJson(jsonReader, ArrayList.class);
 
             if (forgeHolograms == null) {
                 return holograms;
             }
 
-            forgeHolograms.forEach(hologram -> holograms.put(hologram.getId().toLowerCase(), hologram));
+            forgeHolograms.forEach(data -> {
+                ForgeHologram hologram = this.fromTreeMap(data);
+                holograms.put(hologram.getId().toLowerCase(), hologram);
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         return holograms;
+    }
+
+    private ForgeHologram fromTreeMap(LinkedTreeMap<String, Object> map) {
+        LinkedTreeMap<String, Object> loc = (LinkedTreeMap<String, Object>) map.get("loc");
+        List<String> lines = (List<String>) map.get("lines");
+
+        return (ForgeHologram) HologramFactory.builder()
+                .id(map.get("id").toString())
+                .position((double) loc.get("x"), (double) loc.get("y"), (double) loc.get("z"))
+                .world(loc.get("world").toString())
+                .lines(lines.toArray(new String[0]))
+                .build();
     }
 
     @Override

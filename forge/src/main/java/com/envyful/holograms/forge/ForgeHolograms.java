@@ -35,6 +35,7 @@ public class ForgeHolograms {
         instance = this;
 
         this.loadConfig();
+        HologramManager.preInit();
     }
 
     private void loadConfig() {

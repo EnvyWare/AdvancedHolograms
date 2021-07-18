@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class HologramManager implements Runnable {
 
-    static {
+    public static void preInit() {
         new ForgeTaskBuilder()
                 .async(true)
                 .interval(10L)
@@ -45,7 +45,7 @@ public class HologramManager implements Runnable {
     private static HologramSaver saver;
 
     public static void load() {
-        UtilConcurrency.runAsync(saver::load);
+        saver.load();
     }
 
     public static void save() {
