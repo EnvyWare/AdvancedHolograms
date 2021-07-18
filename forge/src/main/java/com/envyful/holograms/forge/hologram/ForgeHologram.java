@@ -5,10 +5,10 @@ import com.envyful.api.forge.player.util.UtilPlayer;
 import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.exception.HologramException;
 import com.envyful.holograms.api.hologram.Hologram;
-import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
+import com.envyful.holograms.forge.hologram.entity.HologramLine;
 import com.google.common.collect.Lists;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.SPacketEntityTeleport;
 import net.minecraft.server.management.PlayerList;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -26,11 +26,12 @@ public class ForgeHologram implements Hologram {
 
     private static final double HOLOGRAM_LINE_GAP = 0.25;
 
-    private String id;
+    private final String id;
+
     private World world;
     private Vec3d position;
-    private List<HologramArmorStand> lines = Lists.newArrayList();
 
+    private final List<HologramLine> lines = Lists.newArrayList();
     private final List<UUID> nearbyPlayers = Lists.newArrayList();
 
     public ForgeHologram(String id, World world, Vec3d position, String... lines) {
@@ -57,8 +58,8 @@ public class ForgeHologram implements Hologram {
             return;
         }
 
-        HologramArmorStand armorStand = new HologramArmorStand(this.world, this.position.x,
-                this.position.y - (HOLOGRAM_LINE_GAP * this.lines.size()), this.position.z);
+        HologramLine armorStand = new HologramLine(new EntityArmorStand(this.world, this.position.x,
+                this.position.y - (0.6 * this.lines.size()), this.position.z));
 
         this.lines.add(armorStand);
         armorStand.setText(line);
@@ -77,13 +78,13 @@ public class ForgeHologram implements Hologram {
 
         PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
-        for (HologramArmorStand line : this.lines) {
+        for (HologramLine line : this.lines) {
             for (EntityPlayerMP player : playerList.getPlayers()) {
                 line.despawnForPlayer(player);
             }
         }
 
-        for (HologramArmorStand line : this.lines) {
+        for (HologramLine line : this.lines) {
             line.setWorld(foundWorld);
             line.setPosition(x, y, z);
         }
@@ -116,13 +117,13 @@ public class ForgeHologram implements Hologram {
         }
 
         for (int i = (index - 1); i < this.lines.size(); ++i) {
-            HologramArmorStand armorStand = this.lines.get(i);
-            armorStand.setPosition(armorStand.posX, this.position.y - (HOLOGRAM_LINE_GAP * (i + 1)), armorStand.posZ);
+            HologramLine armorStand = this.lines.get(i);
+            armorStand.setPosition(this.position.x, this.position.y - (HOLOGRAM_LINE_GAP * (i + 1)), this.position.z);
         }
 
         UtilForgeConcurrency.runSync(() -> {
-            HologramArmorStand newLine = new HologramArmorStand(this.world, this.position.x,
-                    this.position.y - (HOLOGRAM_LINE_GAP * (index - 1)), this.position.z);
+            HologramLine newLine = new HologramLine(new EntityArmorStand(this.world, this.position.x,
+                    this.position.y - (HOLOGRAM_LINE_GAP * (index - 1)), this.position.z));
             newLine.setText(line);
             this.lines.add(index - 1, newLine);
 
@@ -136,8 +137,8 @@ public class ForgeHologram implements Hologram {
                 newLine.spawnForPlayer(player);
 
                 for (int i = (index - 1); i < this.lines.size(); ++i) {
-                    HologramArmorStand armorStand = this.lines.get(i);
-                    player.connection.sendPacket(new SPacketEntityTeleport(armorStand));
+                    HologramLine armorStand = this.lines.get(i);
+                    armorStand.sendTeleportPacket(player);
                 }
             }
 
@@ -162,11 +163,11 @@ public class ForgeHologram implements Hologram {
             throw new HologramException("§4Cannot remove that line as it's out of the bounds of this hologram.");
         }
 
-        HologramArmorStand remove = this.lines.remove(index - 1);
+        HologramLine remove = this.lines.remove(index - 1);
 
         for (int i = (index - 1); i < this.lines.size(); ++i) {
-            HologramArmorStand armorStand = this.lines.get(i);
-            armorStand.setPosition(armorStand.posX, this.position.y - (HOLOGRAM_LINE_GAP * i), armorStand.posZ);
+            HologramLine armorStand = this.lines.get(i);
+            armorStand.setPosition(this.position.x, this.position.y - (HOLOGRAM_LINE_GAP * i), this.position.y);
         }
 
         UtilForgeConcurrency.runSync(() -> {
@@ -179,8 +180,8 @@ public class ForgeHologram implements Hologram {
 
                 remove.despawnForPlayer(player);
 
-                for (HologramArmorStand line : this.lines) {
-                    player.connection.sendPacket(new SPacketEntityTeleport(line));
+                for (HologramLine line : this.lines) {
+                    line.sendTeleportPacket(player);
                 }
             }
         });
@@ -192,7 +193,7 @@ public class ForgeHologram implements Hologram {
     public void delete() {
         PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
-        for (HologramArmorStand line : this.lines) {
+        for (HologramLine line : this.lines) {
             for (EntityPlayerMP player : playerList.getPlayers()) {
                 line.despawnForPlayer(player);
             }
@@ -215,7 +216,7 @@ public class ForgeHologram implements Hologram {
 
         int i = 0;
 
-        for (HologramArmorStand line : this.lines) {
+        for (HologramLine line : this.lines) {
             line.setWorld(world);
             line.setPosition(x, y - (i * HOLOGRAM_LINE_GAP), z);
             ++i;
@@ -228,7 +229,7 @@ public class ForgeHologram implements Hologram {
                         continue;
                     }
 
-                    player.connection.sendPacket(new SPacketEntityTeleport(line));
+                    line.sendTeleportPacket(player);
                 }
             });
         }
@@ -239,11 +240,11 @@ public class ForgeHologram implements Hologram {
     @Override
     public Hologram copy(String newId, String world, double x, double y, double z) {
         return new ForgeHologramBuilder().id(newId).world(world).position(x, y, z)
-                .lines(this.lines.stream().map(e -> e.getDisplayName().getFormattedText()).toArray(String[]::new))
+                .lines(this.lines.stream().map(HologramLine::getText).toArray(String[]::new))
                 .build();
     }
 
-    private void spawnLine(HologramArmorStand armorStand) {
+    private void spawnLine(HologramLine armorStand) {
         PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
         for (UUID nearbyPlayer : this.nearbyPlayers) {
@@ -264,7 +265,7 @@ public class ForgeHologram implements Hologram {
         return this.position;
     }
 
-    List<HologramArmorStand> getLines() {
+    List<HologramLine> getLines() {
         return this.lines;
     }
 

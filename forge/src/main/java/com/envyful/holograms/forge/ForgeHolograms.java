@@ -71,4 +71,5 @@ public class ForgeHolograms {
     public HologramsConfig getConfig() {
         return this.config;
     }
+
 }

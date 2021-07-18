@@ -8,7 +8,7 @@ import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.database.HologramSaver;
 import com.envyful.holograms.forge.ForgeHolograms;
 import com.envyful.holograms.forge.hologram.database.JsonHologramSaver;
-import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
+import com.envyful.holograms.forge.hologram.entity.HologramLine;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -96,7 +96,7 @@ public class HologramManager implements Runnable {
                     if (hologram.getNearbyPlayers().contains(player.getUniqueID())) {
                         hologram.getNearbyPlayers().remove(player.getUniqueID());
 
-                        for (HologramArmorStand line : hologram.getLines()) {
+                        for (HologramLine line : hologram.getLines()) {
                             UtilForgeConcurrency.runSync(() -> line.despawnForPlayer(player));
                         }
                     }
@@ -105,13 +105,13 @@ public class HologramManager implements Runnable {
                 }
 
                 if (!hologram.getNearbyPlayers().contains(player.getUniqueID())) {
-                    for (HologramArmorStand line : hologram.getLines()) {
+                    for (HologramLine line : hologram.getLines()) {
                         UtilForgeConcurrency.runSync(() -> line.spawnForPlayer(player));
                     }
 
                     hologram.getNearbyPlayers().add(player.getUniqueID());
                 } else {
-                    for (HologramArmorStand line : hologram.getLines()) {
+                    for (HologramLine line : hologram.getLines()) {
                         UtilForgeConcurrency.runSync(() -> line.updateForPlayer(player));
                     }
                 }

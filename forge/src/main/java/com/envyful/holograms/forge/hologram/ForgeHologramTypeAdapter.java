@@ -2,7 +2,7 @@ package com.envyful.holograms.forge.hologram;
 
 import com.envyful.api.forge.world.UtilWorld;
 import com.envyful.holograms.api.manager.HologramFactory;
-import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
+import com.envyful.holograms.forge.hologram.entity.HologramLine;
 import com.google.common.collect.Lists;
 import com.google.gson.*;
 
@@ -20,7 +20,7 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
 
         JsonArray lines = new JsonArray();
 
-        for (HologramArmorStand line : hologram.getLines()) {
+        for (HologramLine line : hologram.getLines()) {
             lines.add(line.getText());
         }
 
