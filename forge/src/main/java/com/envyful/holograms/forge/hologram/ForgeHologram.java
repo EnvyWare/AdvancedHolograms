@@ -3,6 +3,7 @@ package com.envyful.holograms.forge.hologram;
 import com.envyful.api.forge.concurrency.UtilForgeConcurrency;
 import com.envyful.api.forge.player.util.UtilPlayer;
 import com.envyful.api.forge.world.UtilWorld;
+import com.envyful.holograms.api.exception.HologramException;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.entity.HologramArmorStand;
 import com.google.common.collect.Lists;
@@ -95,16 +96,16 @@ public class ForgeHologram implements Hologram {
     }
 
     @Override
-    public void removeLines(int... indexes) {
+    public void removeLines(int... indexes) throws HologramException {
         for (int index : indexes) {
             this.removeLine(index);
         }
     }
 
     @Override
-    public void removeLine(int index) {
+    public void removeLine(int index) throws HologramException {
         if (index >= this.lines.size()) {
-            return;
+            throw new HologramException("§4Cannot remove that line as it's out of the bounds of this hologram.");
         }
 
         HologramArmorStand remove = this.lines.remove(index);
@@ -135,6 +136,9 @@ public class ForgeHologram implements Hologram {
         if (world == null) {
             return;
         }
+
+        this.world = world;
+        this.position = new Vec3d(x, y, z);
 
         int i = 0;
 

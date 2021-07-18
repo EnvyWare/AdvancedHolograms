@@ -59,8 +59,9 @@ public interface Hologram {
      * Removes the lines from the hologram
      *
      * @param indexes The lines to remove
+     * @throws HologramException When index is out of bounds
      */
-    void removeLines(int... indexes);
+    void removeLines(int... indexes) throws HologramException;
 
     /**
      *
