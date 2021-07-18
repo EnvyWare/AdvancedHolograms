@@ -144,7 +144,7 @@ public class ForgeHologram implements Hologram {
         }
     }
 
-    String getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -162,5 +162,13 @@ public class ForgeHologram implements Hologram {
 
     List<UUID> getNearbyPlayers() {
         return this.nearbyPlayers;
+    }
+
+    public double getDistance(EntityPlayerMP player) {
+        return this.position.distanceTo(player.getPositionVector());
+    }
+
+    public boolean inRadius(EntityPlayerMP player, int radius) {
+        return this.position.squareDistanceTo(player.posX, player.posY, player.posZ) <= Math.pow(radius, 2);
     }
 }
