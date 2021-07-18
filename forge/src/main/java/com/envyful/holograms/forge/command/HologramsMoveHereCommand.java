@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentString;
                 "mv"
         }
 )
-@Permissible("holograms.command.movehere")
+@Permissible("advancedholograms.command.movehere")
 @Child
 public class HologramsMoveHereCommand {
 

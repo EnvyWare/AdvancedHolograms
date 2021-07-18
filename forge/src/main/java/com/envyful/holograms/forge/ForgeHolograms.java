@@ -17,9 +17,9 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import java.io.IOException;
 
 @Mod(
-        modid = "holograms",
-        name = "Holograms Forge",
-        version = "0.0.1",
+        modid = "advancedholograms",
+        name = "AdvancedHolograms Forge",
+        version = "0.1.0",
         acceptableRemoteVersions = "*"
 )
 public class ForgeHolograms {

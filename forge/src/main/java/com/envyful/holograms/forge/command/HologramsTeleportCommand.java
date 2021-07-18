@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentString;
                 "tp"
         }
 )
-@Permissible("holograms.command.teleport")
+@Permissible("advancedholograms.command.teleport")
 @Child
 public class HologramsTeleportCommand {
 

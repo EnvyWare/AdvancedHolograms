@@ -18,7 +18,7 @@ import net.minecraft.util.text.TextComponentString;
                 "rl"
         }
 )
-@Permissible("holograms.command.removeline")
+@Permissible("advancedholograms.command.removeline")
 @Child
 public class HologramsRemoveLineCommand {
 

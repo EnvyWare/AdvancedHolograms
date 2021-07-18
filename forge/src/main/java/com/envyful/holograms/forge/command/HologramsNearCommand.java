@@ -3,7 +3,6 @@ package com.envyful.holograms.forge.command;
 import com.envyful.api.command.annotate.Child;
 import com.envyful.api.command.annotate.Command;
 import com.envyful.api.command.annotate.Permissible;
-import com.envyful.api.command.annotate.SubCommands;
 import com.envyful.api.command.annotate.executor.Argument;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
@@ -11,7 +10,6 @@ import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.forge.hologram.ForgeHologram;
 import com.envyful.holograms.forge.hologram.HologramManager;
 import com.google.common.collect.Lists;
-import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 
@@ -24,7 +22,7 @@ import java.util.List;
                 "nearby"
         }
 )
-@Permissible("holograms.command.nearby")
+@Permissible("advancedholograms.command.nearby")
 @Child
 public class HologramsNearCommand {
 

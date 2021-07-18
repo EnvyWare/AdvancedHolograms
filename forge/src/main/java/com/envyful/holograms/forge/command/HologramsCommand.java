@@ -15,7 +15,7 @@ import net.minecraft.command.ICommandSender;
                 "holographicdisplays"
         }
 )
-@Permissible("holograms.command")
+@Permissible("advancedholograms.command")
 @SubCommands({
         HologramsCreateCommand.class,
         HologramsDeleteCommand.class,

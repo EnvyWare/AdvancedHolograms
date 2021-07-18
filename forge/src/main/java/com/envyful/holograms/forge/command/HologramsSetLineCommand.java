@@ -21,7 +21,7 @@ import java.util.Arrays;
                 "sl"
         }
 )
-@Permissible("holograms.command.setline")
+@Permissible("advancedholograms.command.setline")
 @Child
 public class HologramsSetLineCommand {
 

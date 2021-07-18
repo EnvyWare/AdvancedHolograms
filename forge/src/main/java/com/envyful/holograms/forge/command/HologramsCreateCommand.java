@@ -20,7 +20,7 @@ import java.util.Arrays;
                 "c"
         }
 )
-@Permissible("holograms.command.create")
+@Permissible("advancedholograms.command.create")
 @Child
 public class HologramsCreateCommand {
 

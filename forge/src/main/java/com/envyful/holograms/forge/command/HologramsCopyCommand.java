@@ -20,7 +20,7 @@ import net.minecraft.util.text.TextComponentString;
                 "duplicate"
         }
 )
-@Permissible("holograms.command.copy")
+@Permissible("advancedholograms.command.copy")
 @Child
 public class HologramsCopyCommand {
 

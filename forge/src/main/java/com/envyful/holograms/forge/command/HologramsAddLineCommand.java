@@ -20,7 +20,7 @@ import java.util.Arrays;
                 "al"
         }
 )
-@Permissible("holograms.command.addline")
+@Permissible("advancedholograms.command.addline")
 @Child
 public class HologramsAddLineCommand {
 
