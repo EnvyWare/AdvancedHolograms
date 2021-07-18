@@ -6,9 +6,7 @@ import com.envyful.api.command.annotate.Permissible;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
 import com.envyful.api.forge.world.UtilWorld;
-import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.HologramFactory;
-import com.envyful.holograms.forge.hologram.HologramManager;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 
@@ -39,13 +37,12 @@ public class HologramsCreateCommand {
             firstLine = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
         }
 
-        Hologram hologram = HologramFactory.builder(id)
+        HologramFactory.builder(id)
                 .line(firstLine)
                 .world(UtilWorld.getName(sender.world))
                 .position(sender.posX, sender.posY, sender.posZ)
                 .build();
 
-        HologramManager.addHologram(hologram);
         sender.sendMessage(new TextComponentString("§aCreated hologram with id " + id));
     }
 }
