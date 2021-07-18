@@ -40,10 +40,8 @@ dependencies {
 
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-/*    shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.5'
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.1.5'*/
-
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'EnvyAPI-Pixelmon-Reforged', version: '0.1.5'
+    shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.6'
+    shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.1.6'
 
     shadow project(':api')
 }
@@ -52,10 +50,12 @@ shadowJar {
     configurations = [project.configurations.shadow]
     archiveName = rootProject.name + '-Forge.jar'
 
-    relocate('org.spongepowered.configurate', 'com.envyful.api.commons.shade.configurate')
-    relocate('org.yaml.snakeyaml', 'com.envyful.api.commons.shade.snakeyaml')
-    relocate('io.leangen.geantyref', 'com.envyful.api.commons.shade.geantyref')
-    relocate('com.envyful.api', 'com.envyful.holograms.forge.shade')
+    relocate('org.spongepowered.configurate', 'com.envyful.holograms.forge.shade.configurate')
+    relocate('org.yaml.snakeyaml', 'com.envyful.holograms.forge.shade.snakeyaml')
+    relocate('io.leangen.geantyref', 'com.envyful.holograms.forge.shade.geantyref')
+    relocate('com.google.gson', 'com.envyful.holograms.forge.shade.gson')
+    relocate('com.zaxxer', 'com.envyful.holograms.forge.shade.hikari')
+    relocate('comorg.slf4j', 'com.envyful.holograms.forge.shade.slf4j')
 
     exclude "**/module-info.class"
 }
