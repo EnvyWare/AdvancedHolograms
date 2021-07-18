@@ -19,7 +19,10 @@ import java.util.List;
 
 @Command(
         value = "near",
-        description = "Gets nearby holograms"
+        description = "Gets nearby holograms",
+        aliases = {
+                "nearby"
+        }
 )
 @Permissible("holograms.command.nearby")
 @Child
@@ -52,8 +55,8 @@ public class HologramsNearCommand {
         sender.sendMessage(new TextComponentString("§eNearby holograms (" + radius + "): "));
 
         for (Hologram hologram : holograms) {
-            sender.sendMessage(new TextComponentString("§e  * " + ((ForgeHologram) hologram).getId()
-                    + " " + ((ForgeHologram) hologram).getDistance(sender)));
+            sender.sendMessage(new TextComponentString("§e  * §b" + ((ForgeHologram) hologram).getId()
+                    + " §e - " + String.format("%.0f", ((ForgeHologram) hologram).getDistance(sender)) + "m"));
         }
     }
 }
