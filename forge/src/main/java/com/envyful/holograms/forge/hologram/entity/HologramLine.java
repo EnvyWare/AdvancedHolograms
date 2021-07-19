@@ -3,7 +3,6 @@ package com.envyful.holograms.forge.hologram.entity;
 import com.envyful.api.forge.chat.UtilChatColour;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.*;
 import net.minecraft.world.World;
@@ -86,13 +85,14 @@ public class HologramLine {
                 }
             }
         } else {*/
-            if (!(this.entity instanceof EntityArmorStand)) {
-                this.entity = new EntityArmorStand(entity.world, entity.posX, entity.posY, entity.posZ);
-                this.initEntity();
-            }
 
+        if (this.text.equals("{empty}")) {
+            this.entity.setAlwaysRenderNameTag(false);
+            this.entity.setCustomNameTag(" ");
+        } else {
             this.entity.setCustomNameTag(UtilChatColour.translateColourCodes('&', this.text));
-/*        }*/
+        }
+        /*        }*/
     }
 
     public String getText() {
