@@ -25,7 +25,7 @@ public class HologramsTeleportCommand {
 
     @CommandProcessor
     public void nearbyCommand(@Sender EntityPlayerMP sender, @Argument Hologram hologram, String[] args) {
-        sender.sendMessage(new TextComponentString("§eTeleporting to ... " + args[0]));
+        sender.sendMessage(new TextComponentString("§eTeleporting to " + args[0] + "..."));
         UtilTeleport.teleportPlayer(sender, ((ForgeHologram) hologram).getWorld(), ((ForgeHologram) hologram).getPosition(), 0f, 0f);
     }
 }

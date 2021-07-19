@@ -28,7 +28,8 @@ import net.minecraft.util.text.TextComponentString;
         HologramsRemoveLineCommand.class,
         HologramsSetLineCommand.class,
         HologramsInsertLineCommand.class,
-        HologramsCopyCommand.class
+        HologramsCopyCommand.class,
+        HologramsListCommand.class
 })
 public class HologramsCommand {
 
@@ -42,7 +43,8 @@ public class HologramsCommand {
             "§e/hd removeline <hologram> <line#> §7 - Removes line from hologram\n" +
             "§e/hd setline <hologram> <line#> <line> §7 - Sets line on hologram\n" +
             "§e/hd insert <hologram> <line#> <line> §7 - Inserts line to hologram\n" +
-            "§e/hd copy <hologram> <newHologram> §7 - Copies a hologram";
+            "§e/hd copy <hologram> <newHologram> §7 - Copies a hologram\n" +
+            "§e/hd list (page) §7 - Lists all the holograms";
 
     @CommandProcessor
     public void helpCommand(@Sender ICommandSender sender, String[] args) {
