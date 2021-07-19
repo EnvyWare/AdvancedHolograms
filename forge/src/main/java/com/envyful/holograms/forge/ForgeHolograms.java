@@ -19,10 +19,12 @@ import java.io.IOException;
 @Mod(
         modid = "advancedholograms",
         name = "AdvancedHolograms Forge",
-        version = "0.1.0",
+        version = ForgeHolograms.VERSION,
         acceptableRemoteVersions = "*"
 )
 public class ForgeHolograms {
+
+    public static final String VERSION = "0.1.0";
 
     private static ForgeHolograms instance;
 
