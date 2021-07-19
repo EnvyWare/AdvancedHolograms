@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @Command(
         value = "create",
-        description = "Creates a hologram",
+        description = "§e/hd create <name> (line) §7 - Creates hologram",
         aliases = {
                 "c"
         }

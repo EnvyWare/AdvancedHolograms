@@ -13,7 +13,7 @@ import net.minecraft.util.text.TextComponentString;
 
 @Command(
         value = "removeline",
-        description = "Removes a specific line from the hologram",
+        description = "§e/hd removeline <hologram> <line#> §7 - Removes line from hologram",
         aliases = {
                 "rl"
         }

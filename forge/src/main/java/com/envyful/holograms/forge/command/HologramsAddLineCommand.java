@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @Command(
         value = "addline",
-        description = "Adds a line to the bottom of the hologram",
+        description = "§e/hd addline <hologram> <line> §7 - Adds line to hologram",
         aliases = {
                 "al"
         }

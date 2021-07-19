@@ -13,7 +13,7 @@ import net.minecraft.util.text.TextComponentString;
 
 @Command(
         value = "delete",
-        description = "Deletes a hologram",
+        description = "§e/hd delete <name> §7 - Deletes hologram",
         aliases = {
                 "d"
         }

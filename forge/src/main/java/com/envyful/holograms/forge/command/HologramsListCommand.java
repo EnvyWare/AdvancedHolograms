@@ -15,7 +15,7 @@ import java.util.List;
 
 @Command(
         value = "list",
-        description = "Holograms list command"
+        description = "§e/hd list (page) §7 - Lists all the holograms"
 )
 @Permissible("advancedholograms.command.list")
 public class HologramsListCommand {

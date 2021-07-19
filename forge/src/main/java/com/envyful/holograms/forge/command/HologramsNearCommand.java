@@ -17,7 +17,7 @@ import java.util.List;
 
 @Command(
         value = "near",
-        description = "Gets nearby holograms",
+        description = "§e/hd near <radius> §7 - Finds nearby holograms",
         aliases = {
                 "nearby"
         }

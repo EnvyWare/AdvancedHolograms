@@ -14,7 +14,7 @@ import net.minecraft.util.text.TextComponentString;
 
 @Command(
         value = "teleport",
-        description = "Teleports the player to the hologram",
+        description = "§e/hd tp <hologram> §7 - Teleports to hologram",
         aliases = {
                 "tp"
         }

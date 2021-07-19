@@ -15,7 +15,7 @@ import net.minecraft.util.text.TextComponentString;
 
 @Command(
         value = "copy",
-        description = "Copies the hologram to a new one at the player's position",
+        description = "§e/hd copy <hologram> <newHologram> §7 - Copies a hologram",
         aliases = {
                 "duplicate"
         }

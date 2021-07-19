@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Command(
         value = "setline",
-        description = "Sets a line on the hologram",
+        description = "§e/hd setline <hologram> <line#> <line> §7 - Sets line on hologram",
         aliases = {
                 "sl"
         }

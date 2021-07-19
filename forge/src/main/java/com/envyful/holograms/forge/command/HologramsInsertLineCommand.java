@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Command(
         value = "insertline",
-        description = "Inserts a line on the hologram"
+        description = "§e/hd insert <hologram> <line#> <line> §7 - Inserts line to hologram"
 )
 @Permissible("advancedholograms.command.insertline")
 @Child

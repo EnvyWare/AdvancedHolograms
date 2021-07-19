@@ -13,7 +13,7 @@ import net.minecraft.util.text.TextComponentString;
 
 @Command(
         value = "movehere",
-        description = "Teleports the hologram to the player",
+        description = "§e/hd movehere <hologram> §7 - Teleports hologram to you",
         aliases = {
                 "mvh",
                 "mv"
