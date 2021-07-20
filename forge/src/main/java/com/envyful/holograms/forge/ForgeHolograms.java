@@ -3,6 +3,7 @@ package com.envyful.holograms.forge;
 
 import com.envyful.api.config.yaml.YamlConfigFactory;
 import com.envyful.api.forge.command.ForgeCommandFactory;
+import com.envyful.api.forge.concurrency.ForgeUpdateBuilder;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.HologramFactory;
 import com.envyful.holograms.forge.command.HologramsCommand;
@@ -24,7 +25,7 @@ import java.io.IOException;
 )
 public class ForgeHolograms {
 
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "0.2.0";
 
     private static ForgeHolograms instance;
 
@@ -38,6 +39,14 @@ public class ForgeHolograms {
 
         this.loadConfig();
         HologramManager.preInit();
+
+        ForgeUpdateBuilder.instance()
+                .name("AdvancedHolograms")
+                .requiredPermission("advancedholograms.update.notify")
+                .owner("Pixelmon-Development")
+                .repo("AdvancedHolograms")
+                .version(VERSION)
+                .start();
     }
 
     private void loadConfig() {
