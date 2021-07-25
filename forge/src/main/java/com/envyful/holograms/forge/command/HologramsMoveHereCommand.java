@@ -26,6 +26,6 @@ public class HologramsMoveHereCommand {
     @CommandProcessor
     public void nearbyCommand(@Sender EntityPlayerMP sender, @Argument Hologram hologram) {
         sender.sendMessage(new TextComponentString("§eTeleporting... "));
-        hologram.teleport(UtilWorld.getName(sender.world), sender.posX, sender.posY, sender.posZ);
+        hologram.teleport(UtilWorld.getName(sender.world), sender.posX, sender.posY - 1, sender.posZ);
     }
 }

@@ -5,6 +5,7 @@ import com.envyful.api.command.annotate.Permissible;
 import com.envyful.api.command.annotate.SubCommands;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
+import com.envyful.holograms.forge.command.file.HologramsCreateFromFileCommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.text.TextComponentString;
 
@@ -29,7 +30,8 @@ import net.minecraft.util.text.TextComponentString;
         HologramsSetLineCommand.class,
         HologramsInsertLineCommand.class,
         HologramsCopyCommand.class,
-        HologramsListCommand.class
+        HologramsListCommand.class,
+        HologramsCreateFromFileCommand.class
 })
 public class HologramsCommand {
 
@@ -44,7 +46,8 @@ public class HologramsCommand {
             "§e/hd setline <hologram> <line#> <line> §7 - Sets line on hologram\n" +
             "§e/hd insert <hologram> <line#> <line> §7 - Inserts line to hologram\n" +
             "§e/hd copy <hologram> <newHologram> §7 - Copies a hologram\n" +
-            "§e/hd list (page) §7 - Lists all the holograms";
+            "§e/hd list (page) §7 - Lists all the holograms\n" +
+            "§e/hd createff <hologram> <path> §7 - Copies text from the file to the hologram";
 
     @CommandProcessor
     public void helpCommand(@Sender ICommandSender sender, String[] args) {
