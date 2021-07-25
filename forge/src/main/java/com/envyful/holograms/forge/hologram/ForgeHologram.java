@@ -46,6 +46,11 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void addLines(String... lines) {
+        if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
+            UtilForgeConcurrency.runSync(() -> this.addLines(lines));
+            return;
+        }
+
         for (String line : lines) {
             this.addLine(line);
         }
