@@ -11,11 +11,14 @@ import com.envyful.holograms.forge.config.HologramsConfig;
 import com.envyful.holograms.forge.hologram.HologramManager;
 import com.envyful.holograms.forge.hologram.manager.ForgeHologramManager;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import org.bstats.forge.Metrics;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 @Mod(
         modid = "advancedholograms",
@@ -39,6 +42,13 @@ public class ForgeHolograms {
 
         this.loadConfig();
         HologramManager.preInit();
+
+        Metrics metrics = new Metrics(
+                Loader.instance().activeModContainer(),
+                event.getModLog(),
+                Paths.get("config/"),
+                12199
+        );
 
         ForgeUpdateBuilder.instance()
                 .name("AdvancedHolograms")
