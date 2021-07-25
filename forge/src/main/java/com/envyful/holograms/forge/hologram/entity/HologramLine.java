@@ -1,6 +1,7 @@
 package com.envyful.holograms.forge.hologram.entity;
 
 import com.envyful.api.forge.chat.UtilChatColour;
+import com.envyful.papi.api.util.UtilPlaceholder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,6 +43,13 @@ public class HologramLine {
     }
 
     public void updateForPlayer(EntityPlayerMP player) {
+        this.entity.setCustomNameTag(UtilChatColour.translateColourCodes(
+                '&',
+                UtilPlaceholder.replaceIdentifiers(
+                        player,
+                        this.text
+                )
+        ));
         player.connection.sendPacket(new SPacketEntityMetadata(this.entity.getEntityId(), this.entity.getDataManager(), false));
     }
 
@@ -62,37 +70,12 @@ public class HologramLine {
     public void setText(String text) {
         this.text = text;
 
-/*        if (text.startsWith("ICON: ")) {
-            String icon = text.split("ICON: ")[1];
-
-            if (!icon.contains(":")) {
-                if (!(this.entity instanceof EntityItem)) {
-                    this.entity = new EntityItem(this.entity.world, this.entity.posX, this.entity.posY, this.entity.posZ);
-                    this.initEntity();
-                }
-
-                ((EntityItem) this.entity).setItem(new ItemStack(Item.getByNameOrId(icon)));
-            } else {
-                String[] args = icon.split(":");
-                int damage = UtilParse.parseInteger(args[1]).orElse(-1);
-
-                if (damage < 0) {
-                    this.entity = new EntityItem(this.entity.world, this.entity.posX, this.entity.posY, this.entity.posZ);
-                    ((EntityItem) this.entity).setItem(new ItemStack(Item.getByNameOrId(icon)));
-                } else {
-                    this.entity = new EntityItem(this.entity.world, this.entity.posX, this.entity.posY, this.entity.posZ);
-                    ((EntityItem) this.entity).setItem(new ItemStack(Item.getByNameOrId(args[0]), 1, damage));
-                }
-            }
-        } else {*/
-
         if (this.text.equals("{empty}")) {
             this.entity.setAlwaysRenderNameTag(false);
             this.entity.setCustomNameTag(" ");
         } else {
             this.entity.setCustomNameTag(UtilChatColour.translateColourCodes('&', this.text));
         }
-        /*        }*/
     }
 
     public String getText() {
