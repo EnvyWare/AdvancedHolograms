@@ -66,6 +66,8 @@ shadowJar {
     relocate('com.zaxxer', 'com.envyful.holograms.forge.shade.hikari')
     relocate('org.slf4j', 'com.envyful.holograms.forge.shade.slf4j')
     relocate('com.envyful.api', 'com.envyful.holograms.forge.shade.envy.api')
+    relocate('org.bstats', 'com.envyful.holograms.forge.shade.bstats')
+
 
     exclude "**/module-info.class"
 }

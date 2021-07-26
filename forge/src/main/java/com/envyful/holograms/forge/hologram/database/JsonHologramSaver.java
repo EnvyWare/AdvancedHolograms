@@ -86,7 +86,7 @@ public class JsonHologramSaver implements HologramSaver {
                 .position((double) loc.get("x"), (double) loc.get("y"), (double) loc.get("z"))
                 .world(loc.get("world").toString())
                 .lines(lines.toArray(new String[0]))
-                .build();
+                .build(false);
     }
 
     @Override

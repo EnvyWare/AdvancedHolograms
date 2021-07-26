@@ -63,6 +63,6 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
                 .position(x, y, z)
                 .world(world)
                 .lines(textLines.toArray(new String[0]))
-                .build();
+                .build(false);
     }
 }

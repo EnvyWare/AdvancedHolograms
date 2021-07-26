@@ -34,14 +34,17 @@ public class ForgeHologram implements Hologram {
     private final List<HologramLine> lines = Lists.newArrayList();
     private final List<UUID> nearbyPlayers = Lists.newArrayList();
 
-    public ForgeHologram(String id, World world, Vec3d position, String... lines) {
+    public ForgeHologram(String id, World world, Vec3d position, boolean save, String... lines) {
         this.id = id;
         this.world = world;
         this.position = position;
 
         this.addLines(lines);
         HologramManager.addHologram(this);
-        HologramManager.save();
+
+        if (save) {
+            HologramManager.save();
+        }
     }
 
     @Override

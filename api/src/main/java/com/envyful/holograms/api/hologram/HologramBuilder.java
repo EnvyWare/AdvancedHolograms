@@ -60,6 +60,17 @@ public interface HologramBuilder {
      *
      * @return The hologram created
      */
-    Hologram build();
+    default Hologram build() {
+        return build(true);
+    }
+
+    /**
+     *
+     * Builds the hologram from the specified values
+     *
+     * @param save Determines if the hologram should be saved when built
+     * @return The hologram created
+     */
+    Hologram build(boolean save);
 
 }

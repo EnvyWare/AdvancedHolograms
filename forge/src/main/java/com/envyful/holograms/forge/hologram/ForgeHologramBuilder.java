@@ -59,7 +59,7 @@ public class ForgeHologramBuilder implements HologramBuilder {
     }
 
     @Override
-    public Hologram build() {
+    public Hologram build(boolean save) {
         World world = UtilWorld.findWorld(this.worldName);
 
         if (world == null) {
@@ -67,6 +67,6 @@ public class ForgeHologramBuilder implements HologramBuilder {
         }
 
         Vec3d pos = new Vec3d((float) this.x, (float) this.y, (float) this.z);
-        return new ForgeHologram(this.id, world, pos, this.lines.toArray(new String[0]));
+        return new ForgeHologram(this.id, world, pos, save, this.lines.toArray(new String[0]));
     }
 }
