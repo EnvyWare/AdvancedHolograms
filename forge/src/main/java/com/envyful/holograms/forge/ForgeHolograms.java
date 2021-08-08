@@ -28,12 +28,13 @@ import java.nio.file.Paths;
 )
 public class ForgeHolograms {
 
-    public static final String VERSION = "0.2.0";
+    public static final String VERSION = "0.3.0";
 
     private static ForgeHolograms instance;
 
     private ForgeCommandFactory commandFactory = new ForgeCommandFactory();
     private HologramsConfig config;
+    private boolean placeholders;
 
     @Mod.EventHandler
     public void onServerStarting(FMLPreInitializationEvent event) {
@@ -67,6 +68,15 @@ public class ForgeHolograms {
         }
     }
 
+    private void checkForHolograms() {
+        try {
+            Class.forName("com.envyful.papi.forge.ForgePlaceholderAPI");
+            this.placeholders = true;
+        } catch (ClassNotFoundException e) {
+            this.placeholders = false;
+        }
+    }
+
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
         this.commandFactory.registerInjector(Hologram.class, (sender, args) -> {
@@ -83,6 +93,7 @@ public class ForgeHolograms {
         this.commandFactory.registerCommand(event.getServer(), new HologramsCommand());
 
         HologramManager.load();
+        this.checkForHolograms();
     }
 
     public static ForgeHolograms getInstance() {
@@ -93,4 +104,7 @@ public class ForgeHolograms {
         return this.config;
     }
 
+    public boolean arePlaceholdersEnabled() {
+        return this.placeholders;
+    }
 }

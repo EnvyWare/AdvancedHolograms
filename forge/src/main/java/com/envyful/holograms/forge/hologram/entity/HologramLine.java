@@ -1,6 +1,8 @@
 package com.envyful.holograms.forge.hologram.entity;
 
 import com.envyful.api.forge.chat.UtilChatColour;
+import com.envyful.holograms.forge.ForgeHolograms;
+import com.envyful.holograms.forge.hologram.ForgeHologram;
 import com.envyful.papi.api.util.UtilPlaceholder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -43,13 +45,16 @@ public class HologramLine {
     }
 
     public void updateForPlayer(EntityPlayerMP player) {
-        this.entity.setCustomNameTag(UtilChatColour.translateColourCodes(
-                '&',
-                UtilPlaceholder.replaceIdentifiers(
-                        player,
-                        this.text
-                )
-        ));
+        if (ForgeHolograms.getInstance().arePlaceholdersEnabled()) {
+            this.entity.setCustomNameTag(UtilChatColour.translateColourCodes(
+                    '&',
+                    UtilPlaceholder.replaceIdentifiers(
+                            player,
+                            this.text
+                    )
+            ));
+        }
+
         player.connection.sendPacket(new SPacketEntityMetadata(this.entity.getEntityId(), this.entity.getDataManager(), false));
     }
 
