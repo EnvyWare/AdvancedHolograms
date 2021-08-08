@@ -39,7 +39,7 @@ public class ForgeHologram implements Hologram {
         this.world = world;
         this.position = position;
 
-        this.addLines(lines);
+        this.addLines(save, lines);
         HologramManager.addHologram(this);
 
         if (save) {
@@ -49,18 +49,26 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void addLines(String... lines) {
+        this.addLines(true, lines);
+    }
+
+    private void addLines(boolean save, String... lines) {
         if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
             UtilForgeConcurrency.runSync(() -> this.addLines(lines));
             return;
         }
 
         for (String line : lines) {
-            this.addLine(line);
+            this.addLine(line, save);
         }
     }
 
     @Override
     public void addLine(String line) {
+        this.addLine(line, true);
+    }
+
+    private void addLine(String line, boolean save) {
         if (!FMLCommonHandler.instance().getMinecraftServerInstance().isCallingFromMinecraftThread()) {
             UtilForgeConcurrency.runSync(() -> this.addLine(line));
             return;
@@ -73,7 +81,9 @@ public class ForgeHologram implements Hologram {
         armorStand.setText(line);
         this.spawnLine(armorStand);
 
-        HologramManager.save();
+        if (save) {
+            HologramManager.save();
+        }
     }
 
     @Override
