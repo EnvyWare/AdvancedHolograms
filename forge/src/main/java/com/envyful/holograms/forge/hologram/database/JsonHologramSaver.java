@@ -16,6 +16,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class JsonHologramSaver implements HologramSaver {
         Map<String, Hologram> holograms = Maps.newHashMap();
 
         try {
-            JsonReader jsonReader = new JsonReader(new FileReader(this.file));
+            InputStreamReader jsonReader = new InputStreamReader(new FileInputStream(this.file), StandardCharsets.UTF_8);
             List<LinkedTreeMap<String, Object>> forgeHolograms = GSON.fromJson(jsonReader, ArrayList.class);
 
             if (forgeHolograms == null) {
@@ -92,7 +93,7 @@ public class JsonHologramSaver implements HologramSaver {
     @Override
     public void save(List<Hologram> holograms) {
         try {
-            JsonWriter jsonWriter = new JsonWriter(new FileWriter(this.file));
+            OutputStreamWriter jsonWriter = new OutputStreamWriter(new FileOutputStream(this.file), StandardCharsets.UTF_8);
             List<ForgeHologram> savedHolograms = Lists.newArrayList();
 
             for (Hologram hologram : holograms) {
