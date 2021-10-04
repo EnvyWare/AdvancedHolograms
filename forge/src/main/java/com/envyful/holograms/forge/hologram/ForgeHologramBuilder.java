@@ -63,6 +63,7 @@ public class ForgeHologramBuilder implements HologramBuilder {
         World world = UtilWorld.findWorld(this.worldName);
 
         if (world == null) {
+            System.out.println("ERROR THE WORLD CANNOT BE FOUND");
             return null;
         }
 

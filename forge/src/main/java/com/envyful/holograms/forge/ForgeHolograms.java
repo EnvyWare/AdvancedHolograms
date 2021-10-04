@@ -3,7 +3,6 @@ package com.envyful.holograms.forge;
 
 import com.envyful.api.config.yaml.YamlConfigFactory;
 import com.envyful.api.forge.command.ForgeCommandFactory;
-import com.envyful.api.forge.concurrency.ForgeUpdateBuilder;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.HologramFactory;
 import com.envyful.holograms.forge.command.HologramsCommand;
@@ -11,14 +10,11 @@ import com.envyful.holograms.forge.config.HologramsConfig;
 import com.envyful.holograms.forge.hologram.HologramManager;
 import com.envyful.holograms.forge.hologram.manager.ForgeHologramManager;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import org.bstats.forge.Metrics;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 @Mod(
         modid = "advancedholograms",
@@ -43,21 +39,6 @@ public class ForgeHolograms {
 
         this.loadConfig();
         HologramManager.preInit();
-
-        Metrics metrics = new Metrics(
-                Loader.instance().activeModContainer(),
-                event.getModLog(),
-                Paths.get("config/"),
-                12199
-        );
-
-        ForgeUpdateBuilder.instance()
-                .name("AdvancedHolograms")
-                .requiredPermission("advancedholograms.update.notify")
-                .owner("Pixelmon-Development")
-                .repo("AdvancedHolograms")
-                .version(VERSION)
-                .start();
     }
 
     private void loadConfig() {

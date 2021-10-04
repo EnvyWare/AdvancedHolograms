@@ -45,9 +45,7 @@ public class HologramManager implements Runnable {
     private static HologramSaver saver;
 
     public static void load() {
-        System.out.println("LOADING HOLOGRAMS");
         saver.load();
-        System.out.println("LOADED HOLOGRAMS");
     }
 
     public static void save() {
