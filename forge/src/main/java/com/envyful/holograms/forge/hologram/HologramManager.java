@@ -89,6 +89,14 @@ public class HologramManager implements Runnable {
         for (EntityPlayerMP player : FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayers()) {
             for (ForgeHologram hologram : HOLOGRAMS.values()) {
                 if (!hologram.getWorld().equals(player.world)) {
+                    if (hologram.getNearbyPlayers().contains(player.getUniqueID())) {
+                        hologram.getNearbyPlayers().remove(player.getUniqueID());
+
+                        for (HologramLine line : hologram.getLines()) {
+                            UtilForgeConcurrency.runSync(() -> line.despawnForPlayer(player));
+                        }
+                    }
+
                     continue;
                 }
 
