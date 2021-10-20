@@ -2,10 +2,10 @@ package com.envyful.holograms.forge.hologram.entity;
 
 import com.envyful.api.forge.chat.UtilChatColour;
 import com.envyful.holograms.forge.ForgeHolograms;
-import com.envyful.holograms.forge.hologram.ForgeHologram;
 import com.envyful.papi.api.util.UtilPlaceholder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.*;
 import net.minecraft.world.World;
@@ -27,6 +27,26 @@ public class HologramLine {
         this.entity.setAlwaysRenderNameTag(true);
         this.entity.setCustomNameTag("");
         this.entity.setEntityId(ENTITY_ID--);
+
+        if (entity instanceof EntityArmorStand) {
+            entity.getDataManager().set(
+                    EntityArmorStand.STATUS,
+                    this.setBit(
+                            entity.getDataManager().get(EntityArmorStand.STATUS),
+                            16, true
+                    )
+            );
+        }
+    }
+
+    private byte setBit(byte p_184797_1_, int p_184797_2_, boolean p_184797_3_) {
+        if (p_184797_3_) {
+            p_184797_1_ = (byte) (p_184797_1_ | p_184797_2_);
+        } else {
+            p_184797_1_ = (byte) (p_184797_1_ & ~p_184797_2_);
+        }
+
+        return p_184797_1_;
     }
 
     public void despawnForPlayer(EntityPlayerMP player) {
