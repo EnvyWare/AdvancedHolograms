@@ -103,4 +103,11 @@ public interface Hologram {
      */
     Hologram copy(String newId, String world, double x, double y, double z);
 
+    /**
+     *
+     * Despawns the hologram for all players
+     *
+     */
+    void despawn();
+
 }

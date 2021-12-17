@@ -209,6 +209,13 @@ public class ForgeHologram implements Hologram {
 
     @Override
     public void delete() {
+        this.despawn();
+        HologramManager.removeHologram(this);
+        HologramManager.save();
+    }
+
+    @Override
+    public void despawn() {
         PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 
         for (HologramLine line : this.lines) {
@@ -216,9 +223,6 @@ public class ForgeHologram implements Hologram {
                 line.despawnForPlayer(player);
             }
         }
-
-        HologramManager.removeHologram(this);
-        HologramManager.save();
     }
 
     @Override

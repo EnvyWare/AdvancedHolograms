@@ -54,6 +54,10 @@ public class HologramLine {
     }
 
     public void spawnForPlayer(EntityPlayerMP player) {
+        if (player == null || player.connection == null) {
+            return;
+        }
+
         if (this.entity instanceof EntityLivingBase) {
             SPacketSpawnMob packet = new SPacketSpawnMob((EntityLivingBase) this.entity);
             player.connection.sendPacket(packet);

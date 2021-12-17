@@ -31,7 +31,8 @@ import net.minecraft.util.text.TextComponentString;
         HologramsInsertLineCommand.class,
         HologramsCopyCommand.class,
         HologramsListCommand.class,
-        HologramsCreateFromFileCommand.class
+        HologramsCreateFromFileCommand.class,
+        HologramsReloadCommand.class
 })
 public class HologramsCommand {
 

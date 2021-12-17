@@ -44,6 +44,13 @@ public class HologramManager implements Runnable {
 
     private static HologramSaver saver;
 
+    public static void clear() {
+        for (ForgeHologram value : HOLOGRAMS.values()) {
+            value.despawn();
+        }
+        HOLOGRAMS.clear();
+    }
+
     public static void load() {
         saver.load();
     }
