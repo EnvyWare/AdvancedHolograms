@@ -22,6 +22,7 @@ public class ForgeHologramBuilder implements HologramBuilder {
     private double x;
     private double y;
     private double z;
+    private int range;
     private List<String> lines = Lists.newArrayList();
 
     public ForgeHologramBuilder() {}
@@ -47,6 +48,12 @@ public class ForgeHologramBuilder implements HologramBuilder {
     }
 
     @Override
+    public HologramBuilder range(int range) {
+        this.range = range;
+        return this;
+    }
+
+    @Override
     public HologramBuilder line(String line) {
         this.lines.add(line);
         return this;
@@ -68,6 +75,6 @@ public class ForgeHologramBuilder implements HologramBuilder {
         }
 
         Vec3d pos = new Vec3d((float) this.x, (float) this.y, (float) this.z);
-        return new ForgeHologram(this.id, world, pos, save, this.lines.toArray(new String[0]));
+        return new ForgeHologram(this.id, world, pos, this.range, save, this.lines.toArray(new String[0]));
     }
 }

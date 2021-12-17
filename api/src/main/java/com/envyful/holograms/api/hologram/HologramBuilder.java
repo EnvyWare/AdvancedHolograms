@@ -38,6 +38,15 @@ public interface HologramBuilder {
 
     /**
      *
+     * Sets the view radius of the hologram
+     *
+     * @param range The view range
+     * @return The builder
+     */
+    HologramBuilder range(int range);
+
+    /**
+     *
      * Adds a single line to the hologram
      *
      * @param line The line to add

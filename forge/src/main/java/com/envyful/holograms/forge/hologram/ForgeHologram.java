@@ -30,14 +30,16 @@ public class ForgeHologram implements Hologram {
 
     private World world;
     private Vec3d position;
+    private int range;
 
     private final List<HologramLine> lines = Lists.newArrayList();
     private final List<UUID> nearbyPlayers = Lists.newArrayList();
 
-    public ForgeHologram(String id, World world, Vec3d position, boolean save, String... lines) {
+    public ForgeHologram(String id, World world, Vec3d position, int range, boolean save, String... lines) {
         this.id = id;
         this.world = world;
         this.position = position;
+        this.range = range;
 
         this.addLines(save, lines);
         HologramManager.addHologram(this);
@@ -289,6 +291,10 @@ public class ForgeHologram implements Hologram {
 
     List<HologramLine> getLines() {
         return this.lines;
+    }
+
+    public int getRange() {
+        return this.range;
     }
 
     List<UUID> getNearbyPlayers() {

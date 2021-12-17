@@ -107,7 +107,7 @@ public class HologramManager implements Runnable {
                     continue;
                 }
 
-                if (player.getDistanceSq(new BlockPos(hologram.getPosition())) > 4096) {
+                if (player.getDistanceSq(new BlockPos(hologram.getPosition())) > (Math.pow(hologram.getRange(), 2))) {
                     if (hologram.getNearbyPlayers().contains(player.getUniqueID())) {
                         hologram.getNearbyPlayers().remove(player.getUniqueID());
 

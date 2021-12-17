@@ -25,6 +25,7 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
         }
 
         object.add("lines", lines);
+        object.addProperty("range", hologram.getRange());
         return object;
     }
 
@@ -50,6 +51,11 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
         double x = loc.get("x").getAsDouble();
         double y = loc.get("y").getAsDouble();
         double z = loc.get("z").getAsDouble();
+        int range = 64;
+
+        if (object.has("range")) {
+            range = object.get("range").getAsInt();
+        }
 
         JsonArray lines = object.getAsJsonArray("lines");
         List<String> textLines = Lists.newArrayList();
@@ -63,6 +69,7 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
                 .position(x, y, z)
                 .world(world)
                 .lines(textLines.toArray(new String[0]))
+                .range(range)
                 .build(false);
     }
 }
