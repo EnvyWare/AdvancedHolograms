@@ -90,7 +90,7 @@ public class JsonHologramSaver implements HologramSaver {
         int range = 64;
 
         if (map.containsKey("range")) {
-            range = (int) map.get("range");
+            range = (int) ((double) map.get("range"));
 
             if (range <= 0) {
                 range = 64;
