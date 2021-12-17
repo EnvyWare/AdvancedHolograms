@@ -37,6 +37,7 @@ import net.minecraft.util.text.TextComponentString;
 public class HologramsCommand {
 
     private static final String HELP_MESSAGE =
+            "&e/hd reload - Reloads hologram database\n" +
             "§e/hd create <name> (line) §7 - Creates hologram\n" +
             "§e/hd delete <name> §7 - Deletes hologram\n" +
             "§e/hd near <radius> §7 - Finds nearby holograms\n" +
