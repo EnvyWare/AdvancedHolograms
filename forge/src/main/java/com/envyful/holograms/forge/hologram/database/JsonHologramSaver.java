@@ -2,6 +2,7 @@ package com.envyful.holograms.forge.hologram.database;
 
 import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.holograms.api.hologram.Hologram;
+import com.envyful.holograms.api.hologram.HologramBuilder;
 import com.envyful.holograms.api.manager.HologramFactory;
 import com.envyful.holograms.api.manager.database.HologramSaver;
 import com.envyful.holograms.forge.hologram.ForgeHologram;
@@ -11,8 +12,6 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.lang.reflect.Modifier;
@@ -82,12 +81,23 @@ public class JsonHologramSaver implements HologramSaver {
         LinkedTreeMap<String, Object> loc = (LinkedTreeMap<String, Object>) map.get("loc");
         List<String> lines = (List<String>) map.get("lines");
 
-        return (ForgeHologram) HologramFactory.builder()
+        HologramBuilder builder = HologramFactory.builder()
                 .id(map.get("id").toString())
                 .position((double) loc.get("x"), (double) loc.get("y"), (double) loc.get("z"))
                 .world(loc.get("world").toString())
-                .lines(lines.toArray(new String[0]))
-                .build(false);
+                .lines(lines.toArray(new String[0]));
+
+        int range = 64;
+
+        if (map.containsKey("range")) {
+            range = (int) map.get("range");
+
+            if (range <= 0) {
+                range = 64;
+            }
+        }
+
+        return (ForgeHologram) builder.range(range).build(false);
     }
 
     @Override
