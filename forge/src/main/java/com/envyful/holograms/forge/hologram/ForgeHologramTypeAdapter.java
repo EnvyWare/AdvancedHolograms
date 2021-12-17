@@ -55,6 +55,10 @@ public class ForgeHologramTypeAdapter implements JsonSerializer<ForgeHologram>, 
 
         if (object.has("range")) {
             range = object.get("range").getAsInt();
+
+            if (range == 0) {
+                range = 64;
+            }
         }
 
         JsonArray lines = object.getAsJsonArray("lines");
