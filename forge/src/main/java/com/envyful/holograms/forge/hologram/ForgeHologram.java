@@ -265,6 +265,7 @@ public class ForgeHologram implements Hologram {
     public Hologram copy(String newId, String world, double x, double y, double z) {
         return new ForgeHologramBuilder().id(newId).world(world).position(x, y, z)
                 .lines(this.lines.stream().map(HologramLine::getText).toArray(String[]::new))
+                .range(64)
                 .build();
     }
 

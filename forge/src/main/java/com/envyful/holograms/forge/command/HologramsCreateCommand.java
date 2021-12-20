@@ -48,6 +48,7 @@ public class HologramsCreateCommand {
                 .line(firstLine)
                 .world(UtilWorld.getName(sender.world))
                 .position(sender.posX, sender.posY - 1, sender.posZ)
+                .range(64)
                 .build();
 
         sender.sendMessage(new TextComponentString("§aCreated hologram with id " + id));

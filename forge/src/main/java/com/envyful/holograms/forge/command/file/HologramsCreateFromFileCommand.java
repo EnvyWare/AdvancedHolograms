@@ -61,6 +61,7 @@ public class HologramsCreateFromFileCommand {
         sender.sendMessage(new TextComponentString("§eCreating hologram: " + args[0]));
         HologramFactory.builder(args[0]).lines(text).world(UtilWorld.getName(sender.world))
                 .position(sender.posX, sender.posY - 1, sender.posZ)
+                .range(64)
                 .build();
     }
 
