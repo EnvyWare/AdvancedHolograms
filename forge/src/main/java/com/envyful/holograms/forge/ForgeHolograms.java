@@ -24,7 +24,7 @@ import java.io.IOException;
 )
 public class ForgeHolograms {
 
-    public static final String VERSION = "0.6.0";
+    public static final String VERSION = "0.6.1";
 
     private static ForgeHolograms instance;
 
