@@ -11,7 +11,7 @@ description='''
 Holograms mod for Minecraft Forge servers
 '''
 [[dependencies.advancedholograms]]
-    modId="com.envyful.advaned.holograms.forge"
+    modId="forge"
     mandatory=true
     versionRange="[36,)"
     ordering="NONE"
