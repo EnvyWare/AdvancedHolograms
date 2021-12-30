@@ -1,28 +1,31 @@
 package com.envyful.advanced.holograms.forge;
 
 
+import com.envyful.advanced.holograms.forge.command.HologramsCommand;
+import com.envyful.advanced.holograms.forge.config.HologramsConfig;
+import com.envyful.advanced.holograms.forge.hologram.HologramManager;
 import com.envyful.advanced.holograms.forge.hologram.manager.ForgeHologramManager;
 import com.envyful.api.config.yaml.YamlConfigFactory;
 import com.envyful.api.forge.command.ForgeCommandFactory;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.manager.HologramFactory;
-import com.envyful.advanced.holograms.forge.command.HologramsCommand;
-import com.envyful.advanced.holograms.forge.config.HologramsConfig;
-import com.envyful.advanced.holograms.forge.hologram.HologramManager;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import java.io.IOException;
 
 @Mod(
-        value = "advancedholograms"
+        value = ForgeHolograms.MOD_ID
 )
+@Mod.EventBusSubscriber(modid = ForgeHolograms.MOD_ID)
 public class ForgeHolograms {
 
+    public static final String MOD_ID = "advancedholograms";
     public static final String VERSION = "0.6.1";
 
     private static ForgeHolograms instance;
@@ -31,8 +34,12 @@ public class ForgeHolograms {
     private HologramsConfig config;
     private boolean placeholders;
 
+    public ForgeHolograms() {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
     @SubscribeEvent
-    public void onServerStarting(FMLServerAboutToStartEvent event) {
+    public void onServerStarting(FMLServerStartingEvent event) {
         HologramFactory.setHologramManager(new ForgeHologramManager());
         instance = this;
 
@@ -50,7 +57,7 @@ public class ForgeHolograms {
 
     private void checkForHolograms() {
         try {
-            Class.forName("com.envyful.papi.com.envyful.advaned.holograms.forge.ForgePlaceholderAPI");
+            Class.forName("com.envyful.papi.forge.ForgePlaceholderAPI");
             this.placeholders = true;
         } catch (ClassNotFoundException e) {
             this.placeholders = false;
@@ -58,7 +65,7 @@ public class ForgeHolograms {
     }
 
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarted(FMLServerStartedEvent event) {
         this.commandFactory.registerInjector(Hologram.class, (sender, args) -> {
             Hologram byId = HologramManager.getById(args[0]);
 
