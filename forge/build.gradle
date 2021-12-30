@@ -42,15 +42,8 @@ dependencies {
 
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.2.0'
-    shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.2.0'
-
-    shadow (group: 'com.github.Pixelmon-Development.bStats-Metrics', name: 'bstats-base', version: '2.2.8') {
-        transitive = false
-    }
-    shadow (group: 'com.github.Pixelmon-Development.bStats-Metrics', name: 'bstats-forge', version: '2.2.8') {
-        transitive = false
-    }
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.5.8'
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge', version: '1.5.8'
 
     shadow project(':api')
 }
