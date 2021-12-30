@@ -16,6 +16,8 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
+forgeVersion = '1.16.5'
+
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
 }
@@ -42,8 +44,8 @@ dependencies {
 
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.5.9'
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge16', version: '1.5.9'
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.6.1'
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge16', version: '1.6.1'
 
     shadow project(':api')
 }

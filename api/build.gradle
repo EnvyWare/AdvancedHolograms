@@ -7,10 +7,12 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+forgeVersion = 'API'
+
 dependencies {
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    compileOnly group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.2.0'
+    compileOnly group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '1.6.1'
 }
 
 shadowJar {

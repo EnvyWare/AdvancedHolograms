@@ -1,22 +1,36 @@
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml"
+# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+# Forge for 1.16.5 is version 36
 loaderVersion="[36,)"
-license="MIT License"
+# The license for your mod. This is mandatory and allows for easier comprehension of your redistributive properties.
+# Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
+license="All Rights Reserved"
+# A URL to refer people to when problems occur with this mod
 issueTrackerURL="https://github.com/Daniel-Forge-Development/AdvancedHolograms/issues"
+# If the mods defined in this file should show as separate resource packs
+showAsResourcePack=false
+
 [[mods]]
-modId="advancedholograms"
-version="0.6.1"
-displayName="AdvancedHolograms"
-displayURL="https://discord.gg/7vqgtrjDGw"
-description='''
-Holograms mod for Minecraft Forge servers
-'''
-[[dependencies.advancedholograms]]
+  modId="advancedholograms"
+  version="0.6.1"
+  displayName="Example Mod"
+  updateJSONURL="https://minecraftforge.net/versions.json"
+  displayURL="https://minecraftforge.net"
+  credits="I'd like to thank my mother and father."
+  authors="Envyful"
+  description='''
+  Lets you craft dirt into diamonds. This is a traditional mod that has existed for eons. It is ancient. The holy Notch created it. Jeb rainbowfied it. Dinnerbone made it upside down. Etc.
+  '''
+
+  [[dependencies.advancedholograms]]
     modId="forge"
     mandatory=true
     versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.pixelmon]]
+
+  [[dependencies.advancedholograms]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.5,1.17)"
