@@ -11,10 +11,10 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 
 @Command(
-        value = "holograms",
+        value = "hd",
         description = "Main holograms command",
         aliases = {
-                "hd",
+                "holograms",
                 "holographicdisplays",
                 "advancedholograms"
         }

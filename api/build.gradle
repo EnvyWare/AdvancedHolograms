@@ -10,9 +10,9 @@ repositories {
 forgeVersion = 'API'
 
 dependencies {
-    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
+    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.1.2'
 
-    compileOnly group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '1.6.1'
+    compileOnly group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '1.6.6'
 }
 
 shadowJar {
