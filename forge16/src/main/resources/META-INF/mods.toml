@@ -13,14 +13,13 @@ showAsResourcePack=false
 
 [[mods]]
   modId="advancedholograms"
-  version="0.6.1"
-  displayName="Example Mod"
-  updateJSONURL="https://minecraftforge.net/versions.json"
-  displayURL="https://minecraftforge.net"
-  credits="I'd like to thank my mother and father."
+  version="0.6.2"
+  displayName="Advanced Holograms"
+  displayURL="https://discord.gg/7vqgtrjDGw"
+  credits="Envyful"
   authors="Envyful"
   description='''
-  Lets you craft dirt into diamonds. This is a traditional mod that has existed for eons. It is ancient. The holy Notch created it. Jeb rainbowfied it. Dinnerbone made it upside down. Etc.
+  AdvancedHolograms for Forge
   '''
 
   [[dependencies.advancedholograms]]
