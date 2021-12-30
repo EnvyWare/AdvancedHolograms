@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT License"
+issueTrackerURL="https://github.com/Daniel-Forge-Development/AdvancedHolograms/issues"
+[[mods]]
+modId="pixelmon"
+version="0.6.1"
+displayName="AdvancedHolograms"
+displayURL="https://discord.gg/7vqgtrjDGw"
+description='''
+Holograms mod for Minecraft Forge servers
+'''
+[[dependencies.advancedholograms]]
+    modId="com.envyful.advaned.holograms.forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.pixelmon]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
