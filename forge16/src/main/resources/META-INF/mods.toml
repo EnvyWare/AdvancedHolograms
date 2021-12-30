@@ -3,7 +3,7 @@ loaderVersion="[36,)"
 license="MIT License"
 issueTrackerURL="https://github.com/Daniel-Forge-Development/AdvancedHolograms/issues"
 [[mods]]
-modId="pixelmon"
+modId="advancedholograms"
 version="0.6.1"
 displayName="AdvancedHolograms"
 displayURL="https://discord.gg/7vqgtrjDGw"
