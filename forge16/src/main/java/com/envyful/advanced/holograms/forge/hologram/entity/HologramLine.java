@@ -63,6 +63,7 @@ public class HologramLine {
         if (this.entity instanceof LivingEntity) {
             SSpawnMobPacket packet = new SSpawnMobPacket((LivingEntity) this.entity);
             player.connection.sendPacket(packet);
+            this.updateForPlayer(player);
         } else {
             SSpawnObjectPacket packet = new SSpawnObjectPacket(this.entity, EntityType.ITEM, 1, this.entity.getPosition());
             player.connection.sendPacket(packet);
@@ -81,7 +82,7 @@ public class HologramLine {
             )));
         }
 
-        player.connection.sendPacket(new SEntityMetadataPacket(this.entity.getEntityId(), this.entity.getDataManager(), false));
+        player.connection.sendPacket(new SEntityMetadataPacket(this.entity.getEntityId(), this.entity.getDataManager(), true));
     }
 
     public void sendTeleportPacket(ServerPlayerEntity player) {
