@@ -12,6 +12,7 @@ import com.envyful.holograms.api.manager.HologramFactory;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
@@ -66,6 +67,12 @@ public class ForgeHolograms {
 
     @SubscribeEvent
     public void onServerStarted(FMLServerStartedEvent event) {
+        HologramManager.load();
+        this.checkForHolograms();
+    }
+
+    @SubscribeEvent
+    public void onCommandRegister(RegisterCommandsEvent event) {
         this.commandFactory.registerInjector(Hologram.class, (sender, args) -> {
             Hologram byId = HologramManager.getById(args[0]);
 
@@ -77,10 +84,7 @@ public class ForgeHolograms {
             return byId;
         });
 
-        this.commandFactory.registerCommand(event.getServer(), new HologramsCommand());
-
-        HologramManager.load();
-        this.checkForHolograms();
+        this.commandFactory.registerCommand(event.getDispatcher(), new HologramsCommand());
     }
 
     public static ForgeHolograms getInstance() {
