@@ -10,9 +10,9 @@ repositories {
 forgeVersion = 'API'
 
 dependencies {
-    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.1.2'
+    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    compileOnly group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.6.6'
+    compileOnly group: 'com.github.EnvyWare.API', name: 'commons', version: '1.9.6'
 }
 
 shadowJar {

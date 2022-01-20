@@ -40,12 +40,12 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
 
-    compileOnly 'com.github.Pixelmon-Development.ForgePlaceholderAPI:api:0.0.1'
+    compileOnly 'com.github.EnvyWare.ForgePlaceholderAPI:api:2.0.3'
 
-    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.1.2'
+    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.6.6'
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge', version: '1.6.6'
+    shadow group: 'com.github.EnvyWare.API', name: 'commons', version: '1.9.6'
+    shadow group: 'com.github.EnvyWare.API', name: 'forge', version: '1.9.6'
 
     shadow project(':api')
 }

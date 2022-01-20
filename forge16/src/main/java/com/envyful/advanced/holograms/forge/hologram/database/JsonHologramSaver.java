@@ -2,7 +2,6 @@ package com.envyful.advanced.holograms.forge.hologram.database;
 
 import com.envyful.advanced.holograms.forge.hologram.ForgeHologram;
 import com.envyful.advanced.holograms.forge.hologram.ForgeHologramTypeAdapter;
-import com.envyful.api.concurrency.UtilConcurrency;
 import com.envyful.holograms.api.hologram.Hologram;
 import com.envyful.holograms.api.hologram.HologramBuilder;
 import com.envyful.holograms.api.manager.HologramFactory;
@@ -37,21 +36,19 @@ public class JsonHologramSaver implements HologramSaver {
     private File file;
 
     public JsonHologramSaver(String file) {
-        UtilConcurrency.runAsync(() -> {
-            this.file = Paths.get(file).toFile();
+        this.file = Paths.get(file).toFile();
 
-            try {
-                if (!this.file.exists()) {
-                    if (!this.file.getParentFile().exists()) {
-                        this.file.getParentFile().mkdirs();
-                    }
-
-                    this.file.createNewFile();
+        try {
+            if (!this.file.exists()) {
+                if (!this.file.getParentFile().exists()) {
+                    this.file.getParentFile().mkdirs();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+
+                this.file.createNewFile();
             }
-        });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

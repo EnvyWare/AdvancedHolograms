@@ -7,13 +7,13 @@ loaderVersion="[36,)"
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="All Rights Reserved"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/Daniel-Forge-Development/AdvancedHolograms/issues"
+issueTrackerURL="https://github.com/EnvyWare/AdvancedHolograms/issues"
 # If the mods defined in this file should show as separate resource packs
 showAsResourcePack=false
 
 [[mods]]
   modId="advancedholograms"
-  version="0.6.4"
+  version="0.6.5"
   displayName="Advanced Holograms"
   displayURL="https://discord.gg/7vqgtrjDGw"
   credits="Envyful"
