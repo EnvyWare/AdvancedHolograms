@@ -12,6 +12,7 @@ import com.envyful.holograms.forge.hologram.manager.ForgeHologramManager;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.IOException;
@@ -72,7 +73,10 @@ public class ForgeHolograms {
         });
 
         this.commandFactory.registerCommand(event.getServer(), new HologramsCommand());
+    }
 
+    @Mod.EventHandler
+    public void onServerStarted(FMLServerStartedEvent event) {
         HologramManager.load();
         this.checkForHolograms();
     }
