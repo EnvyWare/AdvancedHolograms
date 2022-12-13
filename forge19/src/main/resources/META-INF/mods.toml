@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[41,)"
+license="MIT"
+
+[[mods]]
+modId="advancedholograms"
+version="0.6.6"
+displayName="Advanced Holograms"
+authors="EnvyWare"
+description='''
+Adds Holograms support for Forge
+'''
+
+[[dependencies.advancedholograms]]
+modId="forge"
+mandatory=true
+versionRange="[41,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.advancedholograms]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.19,1.20)"
+ordering="NONE"
+side="BOTH"
