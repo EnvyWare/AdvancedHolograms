@@ -1,0 +1,71 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven {
+            url = 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
+    }
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+apply plugin: 'net.minecraftforge.gradle'
+
+forgeVersion = '1.19.3'
+
+minecraft {
+    mappings channel: 'official', version: '1.19.3'
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = 'spongepowered-repo'
+        url = 'https://repo.spongepowered.org/maven'
+    }
+
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.19.3-44.0.17'
+
+    compileOnly 'com.github.EnvyWare.ForgePlaceholderAPI:api:2.0.3'
+
+    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
+
+    shadow group: 'com.github.EnvyWare.API', name: 'commons', version: '3.9.4'
+    shadow (group: 'com.github.EnvyWare.API', name: 'forge19', version: '3.9.4') {
+        transitive = false
+    }
+
+    shadow project(':api')
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+    archiveName = rootProject.name + '-Forge.jar'
+
+    relocate('org.spongepowered.configurate', 'com.envyful.holograms.forge.shade.configurate')
+    relocate('org.yaml.snakeyaml', 'com.envyful.holograms.forge.shade.snakeyaml')
+    relocate('io.leangen.geantyref', 'com.envyful.holograms.forge.shade.geantyref')
+    relocate('com.google.gson', 'com.envyful.holograms.forge.shade.gson')
+    relocate('com.zaxxer', 'com.envyful.holograms.forge.shade.hikari')
+    relocate('org.slf4j', 'com.envyful.holograms.forge.shade.slf4j')
+    relocate('com.envyful.api', 'com.envyful.holograms.forge.shade.envy.api')
+    relocate('org.bstats', 'com.envyful.holograms.forge.shade.bstats')
+
+    exclude "**/module-info.class"
+}
+
+reobf {
+    shadowJar {}
+}
+
+jar.finalizedBy('reobfJar')
+build.finalizedBy('versionedRelease')
