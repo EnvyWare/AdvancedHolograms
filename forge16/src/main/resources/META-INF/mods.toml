@@ -13,7 +13,7 @@ showAsResourcePack=false
 
 [[mods]]
   modId="advancedholograms"
-  version="0.6.6"
+  version="1.0.0"
   displayName="Advanced Holograms"
   displayURL="https://discord.gg/7vqgtrjDGw"
   credits="Envyful"
