@@ -73,13 +73,12 @@ public class HologramLine {
 
     public void updateForPlayer(ServerPlayerEntity player) {
         if (ForgeHolograms.getInstance().arePlaceholdersEnabled()) {
-            this.entity.setCustomName(new StringTextComponent(UtilChatColour.translateColourCodes(
-                    '&',
+            this.entity.setCustomName(UtilChatColour.colour(
                     UtilPlaceholder.replaceIdentifiers(
                             player,
                             this.text
                     )
-            )));
+            ));
         }
 
         player.connection.sendPacket(new SEntityMetadataPacket(this.entity.getEntityId(), this.entity.getDataManager(), true));
@@ -104,7 +103,7 @@ public class HologramLine {
             this.entity.setCustomNameVisible(false);
             this.entity.setCustomName(new StringTextComponent(" "));
         } else {
-            this.entity.setCustomName(new StringTextComponent(UtilChatColour.translateColourCodes('&', this.text)));
+            this.entity.setCustomName(UtilChatColour.colour(this.text));
         }
     }
 

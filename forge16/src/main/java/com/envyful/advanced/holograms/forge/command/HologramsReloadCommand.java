@@ -10,7 +10,6 @@ import com.envyful.api.command.annotate.executor.Sender;
 import com.envyful.api.forge.chat.UtilChatColour;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
 
 @Command(
         value = "reload",
@@ -22,15 +21,13 @@ public class HologramsReloadCommand {
 
     @CommandProcessor
     public void addLineCommand(@Sender ServerPlayerEntity sender) {
-        sender.sendMessage(new StringTextComponent(UtilChatColour.translateColourCodes(
-                '&',
+        sender.sendMessage(UtilChatColour.colour(
                 ForgeHolograms.getInstance().getConfig().getReloadingMessage()
-        )), Util.DUMMY_UUID);
+        ), Util.DUMMY_UUID);
         HologramManager.clear();
         HologramManager.load();
-        sender.sendMessage(new StringTextComponent(UtilChatColour.translateColourCodes(
-                '&',
+        sender.sendMessage(UtilChatColour.colour(
                 ForgeHolograms.getInstance().getConfig().getReloadedMessage()
-        )), Util.DUMMY_UUID);
+        ), Util.DUMMY_UUID);
     }
 }
